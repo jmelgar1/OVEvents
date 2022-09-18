@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.events.killingevents;
+package org.onlyvanilla.ovevents.events.killingevents;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;

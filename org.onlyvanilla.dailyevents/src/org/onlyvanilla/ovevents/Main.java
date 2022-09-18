@@ -18,8 +18,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.onlyvanilla.dailyevents.runnables.CountdownTimer;
-import org.onlyvanilla.dailyevents.runnables.sendDailyEventVote;
 import org.onlyvanilla.ovevents.bukkitevents.editPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovevote;
@@ -32,6 +30,8 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
+import org.onlyvanilla.ovevents.runnables.CountdownTimer;
+import org.onlyvanilla.ovevents.runnables.sendDailyEventVote;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;

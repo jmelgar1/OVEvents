@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.events.killingevents;
+package org.onlyvanilla.ovevents.events.killingevents;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.onlyvanilla.dailyevents.runnables.UpdateScoreboard;
+import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 

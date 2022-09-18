@@ -5,10 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.onlyvanilla.dailyevents.runnables.send30SecondReminder;
-import org.onlyvanilla.dailyevents.runnables.sendDailyEventVote;
-import org.onlyvanilla.dailyevents.runnables.sendVoteFinished;
-import org.onlyvanilla.dailyevents.runnables.startEventCountdown;
+import org.onlyvanilla.ovevents.runnables.send30SecondReminder;
+import org.onlyvanilla.ovevents.runnables.sendDailyEventVote;
+import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
+import org.onlyvanilla.ovevents.runnables.startEventCountdown;
 
 import net.md_5.bungee.api.ChatColor;
 

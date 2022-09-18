@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.runnables;
+package org.onlyvanilla.ovevents.runnables;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

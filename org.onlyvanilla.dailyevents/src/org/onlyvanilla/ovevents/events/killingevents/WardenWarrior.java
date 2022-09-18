@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.events.killingevents;
+package org.onlyvanilla.ovevents.events.killingevents;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.onlyvanilla.dailyevents.runnables.UpdateScoreboard;
+import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ShulkerHunt extends KillMobEvent implements Listener {
+public class WardenWarrior extends KillMobEvent implements Listener {
 	
 	@EventHandler
-	public void killShulker(EntityDeathEvent event) {
+	public void killWarden(EntityDeathEvent event) {
 		
 		LivingEntity entity = event.getEntity();
 		Player p = entity.getKiller();
@@ -22,7 +22,7 @@ public class ShulkerHunt extends KillMobEvent implements Listener {
 		//ensure mob was killed by a player
 		if(!(entity.getKiller() == null)) {
 			
-			if(entity.getType() == EntityType.SHULKER) {
+			if(entity.getType() == EntityType.WARDEN) {
 				
 				boolean contains = dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants")).contains(p);
 				

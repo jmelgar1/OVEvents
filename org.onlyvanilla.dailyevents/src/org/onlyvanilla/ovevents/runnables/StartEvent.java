@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.runnables;
+package org.onlyvanilla.ovevents.runnables;
 
 import java.util.Map;
 
@@ -8,14 +8,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
-import org.onlyvanilla.dailyevents.events.killingevents.BadBats;
-import org.onlyvanilla.dailyevents.events.killingevents.GhastHunter;
-import org.onlyvanilla.dailyevents.events.killingevents.HilariousHomicide;
-import org.onlyvanilla.dailyevents.events.killingevents.KillMobEvent;
-import org.onlyvanilla.dailyevents.events.killingevents.ShulkerHunt;
-import org.onlyvanilla.dailyevents.events.killingevents.WardenWarrior;
-import org.onlyvanilla.dailyevents.events.killingevents.WorldWarZ;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.events.killingevents.BadBats;
+import org.onlyvanilla.ovevents.events.killingevents.GhastHunter;
+import org.onlyvanilla.ovevents.events.killingevents.HilariousHomicide;
+import org.onlyvanilla.ovevents.events.killingevents.KillMobEvent;
+import org.onlyvanilla.ovevents.events.killingevents.ShulkerHunt;
+import org.onlyvanilla.ovevents.events.killingevents.WardenWarrior;
+import org.onlyvanilla.ovevents.events.killingevents.WorldWarZ;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;

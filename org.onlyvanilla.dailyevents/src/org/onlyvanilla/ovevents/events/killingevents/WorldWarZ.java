@@ -1,4 +1,4 @@
-package org.onlyvanilla.dailyevents.events.killingevents;
+package org.onlyvanilla.ovevents.events.killingevents;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
@@ -7,14 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.onlyvanilla.dailyevents.runnables.UpdateScoreboard;
+import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class CowTipper extends KillMobEvent implements Listener {
+public class WorldWarZ extends KillMobEvent implements Listener{
 	
 	@EventHandler
-	public void killCow(EntityDeathEvent event) {
+	public void killZombie(EntityDeathEvent event) {
 		
 		LivingEntity entity = event.getEntity();
 		Player p = entity.getKiller();
@@ -22,8 +22,8 @@ public class CowTipper extends KillMobEvent implements Listener {
 		//ensure mob was killed by a player
 		if(!(entity.getKiller() == null)) {
 			
-			if(entity.getType() == EntityType.COW ||
-			    entity.getType() == EntityType.MUSHROOM_COW) {
+			if(entity.getType() == EntityType.ZOMBIE ||
+			   entity.getType() == EntityType.ZOMBIE_VILLAGER) {
 				
 				boolean contains = dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants")).contains(p);
 				

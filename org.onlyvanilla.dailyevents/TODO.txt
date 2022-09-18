@@ -1,3 +1,0 @@
-2. Do something with the list of participants (put them into the event)
-3. Create a template event for each (kill, mine, craft) (super methods)
-4. Clean up code holy shit its a mess

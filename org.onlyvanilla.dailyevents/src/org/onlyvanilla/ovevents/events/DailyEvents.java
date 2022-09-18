@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.events.killingevents;
+package org.onlyvanilla.ovevents.events;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.onlyvanilla.ovevents.Main;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
-public class KillMobEvent implements Listener {
+public class DailyEvents implements Listener {
 	
 	//Main instance
 	protected Main mainClass = Main.getInstance();

@@ -31,7 +31,6 @@ public class DragonSlayer extends DailyEvents implements Listener{
 					int currentScore = winningEventSection.getInt(p.getName());
 					int newScore = currentScore += 1;
 					winningEventSection.set(p.getName(), newScore);
-					p.sendMessage(ChatColor.LIGHT_PURPLE + "You killed a ghast! " + ChatColor.GOLD + "+1 Point!");
 					p.getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
 					mainClass.saveEventDataFile();
 					

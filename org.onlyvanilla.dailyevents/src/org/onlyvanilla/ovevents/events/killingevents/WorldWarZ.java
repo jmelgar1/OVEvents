@@ -7,11 +7,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.onlyvanilla.ovevents.events.DailyEvents;
 import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class WorldWarZ extends KillMobEvent implements Listener{
+public class WorldWarZ extends DailyEvents implements Listener{
 	
 	@EventHandler
 	public void killZombie(EntityDeathEvent event) {
@@ -28,10 +29,17 @@ public class WorldWarZ extends KillMobEvent implements Listener{
 				boolean contains = dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants")).contains(p);
 				
 				if(contains == true) {
-					int currentScore = winningEventSection.getInt(p.getName());
-					int newScore = currentScore += 1;
-					winningEventSection.set(p.getName(), newScore);
-					p.sendMessage(ChatColor.LIGHT_PURPLE + "You gained a point!");
+					
+					int score = winningEventSection.getInt(p.getName());
+					
+					if(entity.getType() == EntityType.ZOMBIE) {
+						score += 1;
+					} else if(entity.getType() == EntityType.ZOMBIE_VILLAGER) {
+						score += 2;
+						p.sendMessage(ChatColor.LIGHT_PURPLE + "You killed a villager zombie! " + ChatColor.GOLD + "+2 Points!");
+					}
+					
+					winningEventSection.set(p.getName(), score);
 					p.getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
 					mainClass.saveEventDataFile();
 					

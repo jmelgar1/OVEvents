@@ -9,10 +9,14 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.events.DailyEvents;
+import org.onlyvanilla.ovevents.events.craftingevents.CookieClicker;
+import org.onlyvanilla.ovevents.events.fishingevents.FishFrenzy;
 import org.onlyvanilla.ovevents.events.killingevents.BadBats;
+import org.onlyvanilla.ovevents.events.killingevents.BringHomeTheBacon;
+import org.onlyvanilla.ovevents.events.killingevents.CowTipper;
 import org.onlyvanilla.ovevents.events.killingevents.GhastHunter;
 import org.onlyvanilla.ovevents.events.killingevents.HilariousHomicide;
-import org.onlyvanilla.ovevents.events.killingevents.KillMobEvent;
 import org.onlyvanilla.ovevents.events.killingevents.ShulkerHunt;
 import org.onlyvanilla.ovevents.events.killingevents.WardenWarrior;
 import org.onlyvanilla.ovevents.events.killingevents.WorldWarZ;
@@ -35,7 +39,7 @@ public class StartEvent extends BukkitRunnable{
 	String winningEventNS = winningEvent.replaceAll("\\s", "");
 	
 	//initilize KillMobEvent class variable
-	KillMobEvent eventWinnerClass;
+	DailyEvents eventWinnerClass;
 	
 	@Override
 	public void run() {
@@ -84,6 +88,34 @@ public class StartEvent extends BukkitRunnable{
 			
 			eventWinnerClass = wardenWarrior;
 			
+		} else if (winningEventNS.equals("FishFrenzy")){
+			FishFrenzy fishFrenzy = new FishFrenzy();
+			fishFrenzy.registerEvents();
+			createScoreboard(fishFrenzy);
+			
+			eventWinnerClass = fishFrenzy;
+			
+		} else if (winningEventNS.equals("CowTipper")){
+			CowTipper cowTipper = new CowTipper();
+			cowTipper.registerEvents();
+			createScoreboard(cowTipper);
+			
+			eventWinnerClass = cowTipper;
+			
+		} else if (winningEventNS.equals("BringHomeTheBacon")){
+			BringHomeTheBacon bringHomeTheBacon = new BringHomeTheBacon();
+			bringHomeTheBacon.registerEvents();
+			createScoreboard(bringHomeTheBacon);
+			
+			eventWinnerClass = bringHomeTheBacon;
+			
+		} else if (winningEventNS.equals("CookieClicker")){
+			CookieClicker cookieClicker = new CookieClicker();
+			cookieClicker.registerEvents();
+			createScoreboard(cookieClicker);
+			
+			eventWinnerClass = cookieClicker;
+			
 		} else {
 			System.out.println("event not found");
 		}
@@ -92,7 +124,7 @@ public class StartEvent extends BukkitRunnable{
 		endEvent.runTaskLater(mainClass, 400);
 	}
 	
-	void createScoreboard(KillMobEvent className) {
+	void createScoreboard(DailyEvents className) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("OnlyVanilla", "dummy", ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + winningEvent);
 		
@@ -109,7 +141,7 @@ public class StartEvent extends BukkitRunnable{
 		}
 	}
 	
-	public void unregisterEvent(KillMobEvent className) {
+	public void unregisterEvent(DailyEvents className) {
 		className.unregisterEvents();
 	}
 	
@@ -118,7 +150,7 @@ public class StartEvent extends BukkitRunnable{
 		return instance;
 	}
 	
-	public KillMobEvent getEvent() {
+	public DailyEvents getEvent() {
 		return eventWinnerClass;
 	}
 }

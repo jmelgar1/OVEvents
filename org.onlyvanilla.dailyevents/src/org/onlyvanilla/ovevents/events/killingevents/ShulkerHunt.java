@@ -7,11 +7,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.onlyvanilla.ovevents.events.DailyEvents;
 import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ShulkerHunt extends KillMobEvent implements Listener {
+public class ShulkerHunt extends DailyEvents implements Listener {
 	
 	@EventHandler
 	public void killShulker(EntityDeathEvent event) {
@@ -30,7 +31,6 @@ public class ShulkerHunt extends KillMobEvent implements Listener {
 					int currentScore = winningEventSection.getInt(p.getName());
 					int newScore = currentScore += 1;
 					winningEventSection.set(p.getName(), newScore);
-					p.sendMessage(ChatColor.LIGHT_PURPLE + "You gained a point!");
 					p.getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 1F);
 					mainClass.saveEventDataFile();
 					

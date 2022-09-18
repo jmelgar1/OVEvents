@@ -1,0 +1,165 @@
+Fish Frenzy:
+   description: Catch as many fish as you can!
+   item: FISHING_ROD
+   name: Fish Frenzy
+   duration: 20
+   color: LIGHT_PURPLE
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 53
+Ghast Hunter:
+   description: Kill as many ghasts as you can!
+   item: GHAST_TEAR
+   name: Ghast Hunter
+   duration: 20
+   color: WHITE
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Shulker Hunt:
+   description: Kill as many shulkers as you can!
+   item: SHULKER_SHELL
+   name: Shulker Hunt
+   duration: 20
+   color: DARK_PURPLE
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Dragon Slayer:
+   description: Do as much damage to enderdragons as you can!
+   item: DRAGON_HEAD
+   name: Dragon Slayer
+   duration: 60
+   color: DARK_GRAY
+   votes: 0
+   placements:
+      first: 60
+      second: 30
+      third: 15
+Bring Home The Bacon:
+   description: Kill as many pigs as you can!
+   item: COOKED_PORKCHOP
+   name: Bring Home The Bacon
+   duration: 20
+   color: LIGHT_PURPLE
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Crazy Carrots:
+   description: Mine as many fully grown carrot crops as you can!
+   item: CARROT
+   name: Crazy Carrots
+   duration: 20
+   color: GOLD
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Bad Bats:
+   description: Kill as many bats as you can!
+   item: BLACK_DYE
+   name: Bad Bats
+   duration: 20
+   color: DARK_GRAY
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Deep Diamonds:
+   description: Mine as many diamonds as you can!
+   item: DIAMOND
+   name: Deep Diamonds
+   duration: 20
+   color: AQUA
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Warden Warrior:
+   description: Kill as many wardens as you can!
+   item: SCULK_SENSOR
+   name: Warden Warrior
+   duration: 120
+   color: DARK_BLUE
+   votes: 0
+   placements:
+      first: 120
+      second: 60
+      third: 30
+Cookie Clicker:
+   description: Craft as many cookies as you can!
+   item: COOKIE
+   name: Cookie Clicker
+   duration: 20
+   color: YELLOW
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Nasty Netherite:
+   description: Mine as much ancient debri as you can!
+   item: NETHERITE_INGOT
+   name: Nasty Netherite
+   duration: 20
+   color: GRAY
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Precious Potatoes:
+   description: Mine as many fully grown potatoes as you can!
+   item: POTATO
+   name: Precious Potatoes
+   duration: 20
+   color: YELLOW
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Hilarious Homicide:
+   description: Kill as many villagers as you can!
+   item: IRON_SWORD
+   name: Hilarious Homicide
+   duration: 20
+   color: DARK_RED
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+Cow Tipper:
+   description: Kill as many cows as you can!
+   item: COOKED_BEEF
+   name: Cow Tipper
+   duration: 20
+   color: WHITE
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5
+World War Z:
+   description: Kill as many zombies as you can!
+   item: ROTTEN_FLESH
+   name: World War Z
+   duration: 20
+   color: DARK_GREEN
+   votes: 0
+   placements:
+      first: 20
+      second: 10
+      third: 5

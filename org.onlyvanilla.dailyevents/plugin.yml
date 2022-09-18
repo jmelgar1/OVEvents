@@ -1,0 +1,47 @@
+api-version: 1.16
+name: OVEvents
+version: 1.0
+author: OnlyVanilla
+website: www.onlyvanilla.org
+main: org.onlyvanilla.ovevents.Main
+description: OVEvents Commands
+commands:
+    ovprofile:
+        description: Show OnlyVanilla profile
+        usage: /ovprofile [user]
+    configurestats:
+        description: Set stats of players
+        usage: /configurestats [user]
+        permission: ove.configurestats
+    configurestatsct:
+        description: Set stats of players CT
+        usage: /configurestatsct [user]
+        permission: ove.configurestatsct
+    configurestatsbc:
+        description: Set stats of players BC
+        usage: /configurestatsbc [user]
+        permission: ove.configurestatsbc
+    configurestatsma:
+        description: Set stats of players MA
+        usage: /configurestatsma [user]
+        permission: ove.configurestatsma
+    configurestatsrvb:
+        description: Set stats of players RVB
+        usage: /configurestatsrvb [user]
+        permission: ove.configurestatsrvb
+    overeload:
+        description: ove reload
+        usage: /overeload
+        permission: ove.reload
+    oveforcevote:
+        description: Force an event vote
+        usage: /oveforcevote
+        permission: ove.forcevote
+    oveendvote:
+        description: Force an event vote
+        usage: /oveendvote
+        permission: ove.endvote
+    ovevote:
+        description: Get daily event vote
+        usage: /ovevote
+        

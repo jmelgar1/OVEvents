@@ -1,0 +1,12 @@
+#Data for each event. Do not edit this
+#list of players who have already voted
+participants: []
+
+#has voting time passed?
+votetimepassed: false
+
+#currenteventid
+currentid: 0
+
+#winning event (do not edit. this is per event)
+current-event:

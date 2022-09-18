@@ -1,0 +1,61 @@
+#Fish Frenzy Point Values
+fishfrenzy:
+   fish:
+      COD: 1
+      SALMON: 2
+      PUFFERFISH: 3
+      TROPICAL_FISH: 4
+   treasure:
+      BOW: 7
+      ENCHANTED_BOOK: 7
+      FISHING_ROD: 7
+      NAME_TAG: 7
+      NAUTILUS_SHELL: 7
+      SADDLE: 7
+#Hilarious Homicide Point Values
+hilarioushomicide:
+   adult: 1
+   baby: 3
+#World War Z Point Values
+#Ghast Hunter Point Values
+#Whoever kills the most ghasts
+#
+#Shulker Hunt Point Values
+#Whoever kills most shulkers
+#
+#Dragon Slayer Point Values
+#Whoever does most damage
+#
+#Bring Home The Bacon Point Values
+#Whoever kills most pigs
+#
+#Crazy Carrots Point Values
+#Whoever mines most carrots
+#
+#Bad Bats Point Values
+#Whoever kills the most bats
+#
+#Deep Diamonds
+#Whoever mines the most diamonds
+#
+#Warden Warrior
+#Whoever kills the most wardens
+#
+#Cookie Clicker
+#Whoever crafts the most cookies
+#
+#Nasty Netherite
+#Whoever mines the most netherite
+#
+#Precious Potatoes
+#Whoever mines the most potatoes
+#
+#Cow Tipper
+#Whoever kills the most cows
+
+
+
+   
+
+   
+      

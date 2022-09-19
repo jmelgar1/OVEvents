@@ -23,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.bukkitevents.editPlayerPoints;
+import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.commands.ovprofile;
 
 import net.md_5.bungee.api.ChatColor;
@@ -44,7 +44,7 @@ public class configureStatsRVB implements CommandExecutor, Listener{
 	FileConfiguration playerDataConfig = mainClass.getPlayerData();
 	
 	//editPlayerPoints instance
-	editPlayerPoints epp1 = new editPlayerPoints();
+	EditPlayerPoints epp1 = new EditPlayerPoints();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

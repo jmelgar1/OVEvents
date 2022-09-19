@@ -18,7 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.onlyvanilla.ovevents.bukkitevents.editPlayerPoints;
+import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovevote;
 import org.onlyvanilla.ovevents.commands.ovprofile;
@@ -31,7 +31,8 @@ import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
 import org.onlyvanilla.ovevents.runnables.CountdownTimer;
-import org.onlyvanilla.ovevents.runnables.sendDailyEventVote;
+import org.onlyvanilla.ovevents.runnables.EndEvent;
+import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
@@ -123,11 +124,11 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new configureStatsBC(), this);
 			getServer().getPluginManager().registerEvents(new configureStatsMA(), this);
 			getServer().getPluginManager().registerEvents(new configureStatsRVB(), this);
-			getServer().getPluginManager().registerEvents(new editPlayerPoints(), this);
+			getServer().getPluginManager().registerEvents(new EditPlayerPoints(), this);
 			getServer().getPluginManager().registerEvents(new ovevote(), this);
 	
-			//Bukkit runnable (THIS WILL ONLY RUN IF >=2 PLAYERS ARE ONLINE!!!)	
-			sendDailyEventVote dailyVote = new sendDailyEventVote();
+			//Bukkit runnable (THIS WILL ONLY RUN IF >=2 PLAYERS ARE ONLINE!!!)				
+			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			
 			dailyVote.runTaskTimer(this, 0, 30000);
 		}
@@ -135,6 +136,9 @@ public class Main extends JavaPlugin implements Listener{
 		@Override
 		public void onDisable() {
 			System.out.println("(!) OVEvents Disabled");
+			
+			EndEvent endEvent = new EndEvent();
+			endEvent.run();
 			
 		}
 		

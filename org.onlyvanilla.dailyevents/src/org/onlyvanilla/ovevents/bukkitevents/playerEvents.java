@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.commands.ovprofile;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -25,6 +26,9 @@ public class playerEvents implements Listener {
 	
 	//Luckperms api
 	static LuckPerms api = LuckPermsProvider.get();
+	
+	//ovprofile
+	ovprofile OVProfile = new ovprofile();
 	
 	//when a player joins the server
 	@EventHandler
@@ -64,6 +68,12 @@ public class playerEvents implements Listener {
 			bigEventsSection.createSection("map-art-contests");
 			bigEventsSection.createSection("red-vs-blue");
 			
+			//create section for individual small events
+			ConfigurationSection smallEventsSection = statsSection.getConfigurationSection("small-events");
+			for(String events : ovprofile.events) {
+				smallEventsSection.set(events, 0);
+			}
+
 			
 			playerUUID.createSection("rank");
 			playerUUID.set("rank", getPlayerGroup(p.getName()));

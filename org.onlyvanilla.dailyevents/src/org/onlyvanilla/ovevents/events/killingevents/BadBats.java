@@ -10,8 +10,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.onlyvanilla.ovevents.events.DailyEvents;
 import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class BadBats extends DailyEvents implements Listener {
 	
 	@EventHandler

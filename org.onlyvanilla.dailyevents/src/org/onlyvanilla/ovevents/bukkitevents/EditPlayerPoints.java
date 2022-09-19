@@ -14,7 +14,7 @@ import org.onlyvanilla.ovevents.Main;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class editPlayerPoints implements Listener{
+public class EditPlayerPoints implements Listener{
 	
 	//Main instance
 	private Main mainClass = Main.getInstance();

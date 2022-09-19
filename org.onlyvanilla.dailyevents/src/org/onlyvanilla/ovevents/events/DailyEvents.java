@@ -16,7 +16,7 @@ public class DailyEvents implements Listener {
 	public DetermineEventData dev1 = new DetermineEventData();
 	
 	//get winning event 
-	String winningEvent = mainClass.dev1.getVotedEvent(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
+	public String winningEvent = mainClass.dev1.getVotedEvent(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
 	
 	//event data file from main class
 	FileConfiguration eventData = mainClass.getEventData();

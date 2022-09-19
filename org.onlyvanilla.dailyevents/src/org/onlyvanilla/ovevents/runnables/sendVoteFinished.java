@@ -31,37 +31,44 @@ public class sendVoteFinished extends BukkitRunnable{
 		
 		mainClass.getEventData().set("eventid", 0);
 		
-		for(Player p : dev1.getNonParticipatingPlayers(mainClass.getEventData().getStringList("participants"))) {
-			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
-			p.sendMessage(mainClass.prefix + ChatColor.RED + "You did not vote for an event "
-					+ "and will not be participating!");
-		}
-		
-		//send to players who joined
-		for(Player p : dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants"))) {		
-			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
-			p.sendMessage(mainClass.prefix + ChatColor.GREEN + "The voting time has expired and "
-					+ "the event will start in 3 minutes!");
+		if(!winningEvent.equals("NONE")) {
 			
-			//add participants to config file to track scores
-			winningEventSection.createSection(p.getName());
-			winningEventSection.set(p.getName(), 0);
+			for(Player p : dev1.getNonParticipatingPlayers(mainClass.getEventData().getStringList("participants"))) {
+				p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You did not vote for an event "
+						+ "and will not be participating!");
+			}
+			
+			//send to players who joined
+			for(Player p : dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants"))) {		
+				p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
+				p.sendMessage(mainClass.prefix + ChatColor.GREEN + "The voting time has expired and "
+						+ "the event will start in 3 minutes!");
+				
+				//add participants to config file to track scores
+				winningEventSection.createSection(p.getName());
+				winningEventSection.set(p.getName(), 0);
+			}
+			
+			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+				p.sendMessage(mainClass.prefix + " "
+							+ ChatColor.LIGHT_PURPLE + winningEvent
+							+ " has won the vote!");
+			}
+			
+			mainClass.saveSmallEventsFile();
+			mainClass.saveEventDataFile();
+			mainClass.reloadEventDataFile();
+			
+			send30SecondReminder secondReminder = new send30SecondReminder();
+			secondReminder.runTaskLater(mainClass, 200);
+			
+		} else {
+			
+			//if no one voted. try again in 20 minutes
+			Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + "Not enough players voted for an event! Will try again in 20 minutes!");
+			SendDailyEventVote sendDailyEventVote = new SendDailyEventVote();
+			sendDailyEventVote.runTaskLater(mainClass, 24000);
 		}
-		
-		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
-			p.sendMessage(mainClass.prefix + " "
-						+ ChatColor.LIGHT_PURPLE + winningEvent
-						+ " has won the vote!");
-		}
-		
-		
-		//switch statement to determine which event will be played
-		
-		mainClass.saveSmallEventsFile();
-		mainClass.saveEventDataFile();
-		mainClass.reloadEventDataFile();
-		
-		send30SecondReminder secondReminder = new send30SecondReminder();
-		secondReminder.runTaskLater(mainClass, 200);
 	}
 }

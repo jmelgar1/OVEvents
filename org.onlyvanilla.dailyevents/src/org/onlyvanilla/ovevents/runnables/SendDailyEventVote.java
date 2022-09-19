@@ -11,7 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-public class sendDailyEventVote extends BukkitRunnable{
+public class SendDailyEventVote extends BukkitRunnable{
     
 	//Main instance
 	private Main mainClass = Main.getInstance();

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.onlyvanilla.ovevents.runnables.send30SecondReminder;
-import org.onlyvanilla.ovevents.runnables.sendDailyEventVote;
+import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
 import org.onlyvanilla.ovevents.runnables.startEventCountdown;
 
@@ -14,7 +14,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class oveEndVote implements CommandExecutor{
 	
-	sendDailyEventVote dailyVote = new sendDailyEventVote();
+	SendDailyEventVote dailyVote = new SendDailyEventVote();
 	startEventCountdown eventCountdown = new startEventCountdown();
 	send30SecondReminder secondReminder = new send30SecondReminder();
 	sendVoteFinished voteFinished = new sendVoteFinished();

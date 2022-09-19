@@ -5,14 +5,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.runnables.sendDailyEventVote;
+import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 
 public class oveForceVote implements CommandExecutor{
 	
 	//Main instance
 	private Main mainClass = Main.getInstance();
 	
-	sendDailyEventVote dailyVote = new sendDailyEventVote();
+	SendDailyEventVote dailyVote = new SendDailyEventVote();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

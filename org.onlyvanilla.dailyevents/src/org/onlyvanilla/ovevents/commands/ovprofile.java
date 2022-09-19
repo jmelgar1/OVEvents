@@ -61,7 +61,7 @@ public class ovprofile implements Listener, CommandExecutor{
 								 ChatColor.GOLD, ChatColor.DARK_GRAY, ChatColor.AQUA, ChatColor.DARK_BLUE, ChatColor.YELLOW,
 								 ChatColor.GRAY, ChatColor.YELLOW, ChatColor.DARK_RED, ChatColor.WHITE, ChatColor.DARK_GREEN};
 	
-	static String[] events = {"Fish Frenzy", "Ghast Hunter", "Shulker Hunt", "Dragon Slayer", "Bring Home The Bacon", "Crazy Carrots",
+	public static String[] events = {"Fish Frenzy", "Ghast Hunter", "Shulker Hunt", "Dragon Slayer", "Bring Home The Bacon", "Crazy Carrots",
 							  "Bad Bats", "Deep Diamonds", "Warden Warrior", "Cookie Clicker", "Nasty Netherite",
 							  "Precious Potatoes", "Hilarious Homicide", "Cow Tipper", "World War Z"};
 	

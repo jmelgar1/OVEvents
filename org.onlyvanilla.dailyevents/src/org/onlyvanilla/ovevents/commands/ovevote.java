@@ -39,9 +39,6 @@ public class ovevote implements CommandExecutor, Listener{
 	
     //create empty hashmap for voting
     static Map<String, ConfigurationSection> eventVote = new HashMap<String, ConfigurationSection>();
-    
-    //list of event players
-	List<String> participantList = (List<String>)mainClass.getEventData().getStringList("participants");
 		
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	
@@ -149,7 +146,7 @@ public class ovevote implements CommandExecutor, Listener{
 		mainClass.saveSmallEventsFile();
 		
 		//add player to temp event list
-		addPlayerToEventList(p, participantList, itemName); 
+		addPlayerToEventList(p, (List<String>)mainClass.getEventData().getStringList("participants"), itemName); 
     }
 
     

@@ -12,6 +12,8 @@ import org.onlyvanilla.ovevents.Main;
 
 public class DetermineEventData {
 	
+	public DetermineEventData instance = this;
+	
 	//create smallevent empty list
 	ArrayList<String> smallEventNames = new ArrayList<String>();
 	
@@ -109,6 +111,7 @@ public class DetermineEventData {
 	public String getVotedEvent(FileConfiguration smallEvents, List<String> smallEventNames, Main mainClass) {
 		String topEvent = "NONE";
 		int topVote = 0;
+		int totalVotes = 0;
 		
 	   	//gets all events from list
     	for(String names : smallEventNames) {	
@@ -119,11 +122,21 @@ public class DetermineEventData {
     			topVote = votes;
     			topEvent = names;
     		}
+    		
+    		totalVotes += votes;
     	}
     	
-    	//clear votes
-    	//clearVotes(smallEvents, getList(), mainClass);
+    	//if less than 2 players vote return none
+    	if(totalVotes < 2) {
+    		return "NONE";
+    	}
+    	
+    	//if one person votes cancel.
     	
     	return topEvent;
+	}
+	
+	public DetermineEventData getInstance() {
+		return instance;
 	}
 }

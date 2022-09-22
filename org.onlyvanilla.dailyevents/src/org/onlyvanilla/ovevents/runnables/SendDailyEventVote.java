@@ -21,33 +21,43 @@ public class SendDailyEventVote extends BukkitRunnable{
 	@Override
 	public void run() {
 		
-		//clear previous participation list
-		dev1.clearParticipationList(mainClass);
-
-		//rotate the events
-		mainClass.dev1.RotateEvents(mainClass.dev1.getList());
-		
-		//generate random eventid
-		int eventID = (int)(Math.random()*10000);
-		mainClass.getEventData().set("eventid", eventID);
-		mainClass.saveEventDataFile();
-		
-		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+		if(Bukkit.getServer().getOnlinePlayers().size() >= 2) {
 			
-			p.getWorld().playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_1, 500F, 1.2F);
+			//clear previous participation list
+			mainClass.dev1.clearParticipationList(mainClass);
 			
-			TextComponent message = new TextComponent("          ✦ Click Here To Vote! ✦");
-	    	message.setColor(ChatColor.RED);
-	    	message.setItalic(true);
-	    	message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ovevote"));
-	    	p.sendMessage(ChatColor.GRAY + "-----" + ChatColor.AQUA + ChatColor.BOLD + "Only"
-	    										   + ChatColor.WHITE + "" + ChatColor.BOLD + "Vanilla" 
-	    										   + ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + " EVENT VOTE!" + ChatColor.GRAY + "-----");
-	    	p.spigot().sendMessage(message);
-	    	p.sendMessage("");
-	    	p.sendMessage(ChatColor.GREEN + " Voting will be open for 2 minutes!");
+			mainClass.dev1.clearVotes(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
+	
+			//rotate the events
+			mainClass.dev1.RotateEvents(mainClass.dev1.getList());
+			
+			//generate random eventid
+			int eventID = (int)(Math.random()*10000);
+			mainClass.getEventData().set("eventid", eventID);
+			mainClass.saveEventDataFile();
+			
+			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+				
+				p.getWorld().playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_1, 500F, 1.2F);
+				
+				TextComponent message = new TextComponent("          ✦ Click Here To Vote! ✦");
+		    	message.setColor(ChatColor.RED);
+		    	message.setItalic(true);
+		    	message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ovevote"));
+		    	p.sendMessage(ChatColor.GRAY + "-----" + ChatColor.AQUA + ChatColor.BOLD + "Only"
+		    										   + ChatColor.WHITE + "" + ChatColor.BOLD + "Vanilla" 
+		    										   + ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + " EVENT VOTE!" + ChatColor.GRAY + "-----");
+		    	p.spigot().sendMessage(message);
+		    	p.sendMessage("");
+		    	p.sendMessage(ChatColor.GREEN + " Voting will be open for 2 minutes!");
+			}
+			
+			sendVoteFinished voteFinished = new sendVoteFinished();
+			voteFinished.runTaskLater(mainClass, 200);
+			
+		} else {
+			System.out.println("[OVEvents] Tried to send event vote. Less than 2 players online. Trying again in 20 minutes.");
+			mainClass.runEventNotif20Minutes();
 		}
-		sendVoteFinished voteFinished = new sendVoteFinished();
-		voteFinished.runTaskLater(mainClass, 200);
 	}
 }

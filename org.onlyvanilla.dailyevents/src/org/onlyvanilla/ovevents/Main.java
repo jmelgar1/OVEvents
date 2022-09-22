@@ -2,25 +2,21 @@ package org.onlyvanilla.ovevents;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovevote;
+import org.onlyvanilla.ovevents.commands.ovlevels;
 import org.onlyvanilla.ovevents.commands.ovprofile;
 import org.onlyvanilla.ovevents.commands.admin.configureStats;
 import org.onlyvanilla.ovevents.commands.admin.configureStatsBC;
@@ -30,14 +26,11 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
-import org.onlyvanilla.ovevents.runnables.CountdownTimer;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 
 public class Main extends JavaPlugin implements Listener{
 	
@@ -103,6 +96,7 @@ public class Main extends JavaPlugin implements Listener{
 			//plugin commands
 			this.getCommand("ovprofile").setExecutor(new ovprofile());
 			this.getCommand("ovevote").setExecutor(new ovevote());
+			this.getCommand("ovlevels").setExecutor(new ovlevels());
 			
 			//admin commands
 			this.getCommand("configurestats").setExecutor(new configureStats());
@@ -116,6 +110,7 @@ public class Main extends JavaPlugin implements Listener{
 			
 			//register events
 			getServer().getPluginManager().registerEvents(new ovprofile(), this);
+			getServer().getPluginManager().registerEvents(new ovlevels(), this);
 			
 			//admin events
 			getServer().getPluginManager().registerEvents(new playerEvents(), this);
@@ -126,11 +121,13 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new configureStatsRVB(), this);
 			getServer().getPluginManager().registerEvents(new EditPlayerPoints(), this);
 			getServer().getPluginManager().registerEvents(new ovevote(), this);
-	
-			//Bukkit runnable (THIS WILL ONLY RUN IF >=2 PLAYERS ARE ONLINE!!!)				
-			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			
-			dailyVote.runTaskTimer(this, 0, 30000);
+			SendDailyEventVote dailyVote = new SendDailyEventVote();
+			dailyVote.run();
+			
+			
+			//use this to prevent players from using items that they cant use
+			//testRunnable();
 		}
 		
 		@Override
@@ -243,4 +240,24 @@ public class Main extends JavaPlugin implements Listener{
 		public FileConfiguration getEventData() {
 			return this.eventData;
 		}
+		
+		public void runEventNotif20Minutes() {
+			SendDailyEventVote dailyVote = new SendDailyEventVote();
+			dailyVote.runTaskLater(this, 240);
+		}
+		
+//		public void testRunnable() {
+//			new BukkitRunnable() {
+//				@SuppressWarnings("deprecation")
+//				public void run() {
+//					for(Player p : Bukkit.getOnlinePlayers()) {
+//						System.out.println("checkling for pickaxe");
+//						if(p.getItemInHand().getItemMeta().getLore().contains(ChatColor.RED + "Level 100+")) {
+//							ItemStack item = p.getItemInHand();
+//							p.getInventory().removeItem(item);
+//						}
+//					}
+//				}
+//			}.runTaskTimer(this, 1l, 1l);
+//		}
 	}

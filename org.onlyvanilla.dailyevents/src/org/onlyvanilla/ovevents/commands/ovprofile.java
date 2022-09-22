@@ -2,7 +2,6 @@ package org.onlyvanilla.ovevents.commands;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,9 +33,7 @@ import org.onlyvanilla.ovevents.Main;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.model.group.Group;
 import net.luckperms.api.model.user.User;
-import net.luckperms.api.query.QueryOptions;
 import net.md_5.bungee.api.ChatColor;
 
 public class ovprofile implements Listener, CommandExecutor{
@@ -257,11 +254,11 @@ public class ovprofile implements Listener, CommandExecutor{
 		}
 	}
 	
-    @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
-    	HandlerList.unregisterAll(this);
-    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
-    }
+//    @EventHandler
+//    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
+//    	HandlerList.unregisterAll(this);
+//    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
+//    }
     
     //create red vs blue banner
     public static ItemStack redvsblueBanner() {
@@ -270,9 +267,11 @@ public class ovprofile implements Listener, CommandExecutor{
     	
     	List<Pattern> patterns = new ArrayList<Pattern>();
     	
-    	patterns.add(new Pattern(DyeColor.BLUE, PatternType.HALF_HORIZONTAL_MIRROR));
-    	patterns.add(new Pattern(DyeColor.BLUE, PatternType.HALF_HORIZONTAL_MIRROR));
-    	patterns.add(new Pattern(DyeColor.BLUE, PatternType.HALF_HORIZONTAL_MIRROR));
+    	//add banner design 3 times
+    	for(int i = 0; i <3; i ++) {
+    		patterns.add(new Pattern(DyeColor.BLUE, PatternType.HALF_HORIZONTAL_MIRROR));
+    	}
+
     	m.setPatterns(patterns);
     	
     	m.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);

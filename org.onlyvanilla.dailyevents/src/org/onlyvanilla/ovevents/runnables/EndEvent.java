@@ -1,8 +1,6 @@
 package org.onlyvanilla.ovevents.runnables;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -69,19 +67,16 @@ public class EndEvent extends BukkitRunnable{
 					smallEventsSection.set(dailyEvents.winningEvent, score);
 				}
 				
-				//different
-				int XP = getXP(playerUUIDString);
-				
 				if(counter == 3) {
-					XP += XPGiven/(counter+1);
+					XPGiven = XPGiven/(counter+1);
 				} else {
-					XP += XPGiven/counter;
+					XPGiven = XPGiven/counter;
 				}
 				
-				//set new players xp
-				editPlayerPoints.addLevelXP(XP, playerUUID);
-
 				counter++;
+				
+				//set new players xp
+				editPlayerPoints.addLevelXP(XPGiven, playerUUID);
 				
 				mainClass.savePlayerDataFile();
 			}
@@ -104,12 +99,18 @@ public class EndEvent extends BukkitRunnable{
 			System.out.println(e);
 		}
 		
-		dev1.clearVotes(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
-		removeScoreboard();
-		
 		//send a new task in 20 minutes
 		SendDailyEventVote sendDailyEventVote = new SendDailyEventVote();
-		sendDailyEventVote.runTaskLater(mainClass, 24000);
+		sendDailyEventVote.runTaskLater(mainClass, 240);
+		
+		//remove scoreboard
+		removeScoreboard();
+		
+		//clearing previous votes and removing the scoreboard from players
+		dev1.clearParticipationList(mainClass);
+		dev1.clearVotes(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
+		
+		mainClass.saveEventDataFile();
 	}
 	
 	public void removeScoreboard() {

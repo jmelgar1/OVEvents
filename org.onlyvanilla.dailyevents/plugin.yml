@@ -9,6 +9,12 @@ commands:
     ovprofile:
         description: Show OnlyVanilla profile
         usage: /ovprofile [user]
+    ovevote:
+        description: Get daily event vote
+        usage: /ovevote
+    ovlevels:
+        description: See the leveling titles
+        usage: /ovlevels
     configurestats:
         description: Set stats of players
         usage: /configurestats [user]
@@ -41,7 +47,4 @@ commands:
         description: Force an event vote
         usage: /oveendvote
         permission: ove.endvote
-    ovevote:
-        description: Get daily event vote
-        usage: /ovevote
         

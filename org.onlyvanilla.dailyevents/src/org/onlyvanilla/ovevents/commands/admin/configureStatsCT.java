@@ -62,6 +62,7 @@ public class configureStatsCT implements CommandExecutor, Listener{
 	}
 	
 	//create champions tour inventory
+	@SuppressWarnings("deprecation")
 	public static void initializeChampionsTourItems(String IGN) {
 	//player head info
 	ItemStack skull = new ItemStack(Material.PLAYER_HEAD);

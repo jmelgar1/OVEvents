@@ -1,6 +1,8 @@
 package org.onlyvanilla.ovevents.commands;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,28 +14,30 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.inventory.InventoryManager;
 
-public class ovlevels implements Listener, CommandExecutor{
+public class ovlevels extends InventoryManager implements Listener, CommandExecutor{
 	
 	private static Inventory inv1;
+	
+	public static Map<UUID, Inventory> inventories = new HashMap<UUID, Inventory>();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
 		Player p = (Player) sender;
-        	if(cmd.getName().equalsIgnoreCase("ovlevels")) { 		
-        		inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 1/6)");
-            	openInventory(p, inv1);
+        	if(cmd.getName().equalsIgnoreCase("ovlevels")) { 
+        		UUID playerUUID = p.getUniqueId();
+        		inv1 = Bukkit.createInventory(p, 54, "OnlyVanilla Levels (Page 1/6)");
+        		inventories.put(playerUUID, inv1);
+            	openInventory(p, inventories.get(playerUUID));
             	initializeItemsPage1();
+            	System.out.println(inventories);
         	}
         return true;
     }
@@ -218,6 +222,7 @@ public static void initializeItemsPage3() {
 		inv1.setItem(53, createGuiItem(Material.LIME_WOOL, ChatColor.GREEN + "" + ChatColor.BOLD + "NEXT PAGE"));
 	}
 
+@SuppressWarnings("deprecation")
 public static void initializeItemsPage4() {
 	
 	//SPECIALIST ITEMS
@@ -269,8 +274,7 @@ public static void initializeItemsPage4() {
 	inv1.setItem(24, createGuiItemEnchantment(Material.NETHERITE_PICKAXE, Enchantment.LOOT_BONUS_BLOCKS, 6, true, ChatColor.LIGHT_PURPLE + "Expert's Pace Pickaxe",
 			"",
 			ChatColor.YELLOW + "Trader:",
-			ChatColor.DARK_GRAY + "???"));
-	
+			ChatColor.DARK_GRAY + "???"));	
 	
 	inv1.setItem(45, createGuiItem(Material.RED_WOOL, ChatColor.RED + "" + ChatColor.BOLD + "GO BACK"));
 	inv1.setItem(49, createGuiItem(Material.BARRIER, ChatColor.DARK_RED + "" + ChatColor.BOLD + "EXIT"));
@@ -279,7 +283,7 @@ public static void initializeItemsPage4() {
 
 public static void initializeItemsPage5() {
 	
-	//SPECIALIST ITEMS
+	//ELITE ITEMS
 	inv1.setItem(2, createGuiItem(Material.DIAMOND, ChatColor.AQUA + "" + ChatColor.BOLD + "ELITE",
 			ChatColor.RED + "Level 80-89"));
 	
@@ -330,9 +334,10 @@ public static void initializeItemsPage5() {
 	inv1.setItem(53, createGuiItem(Material.LIME_WOOL, ChatColor.GREEN + "" + ChatColor.BOLD + "NEXT PAGE"));
 }
 
+@SuppressWarnings("deprecation")
 public static void initializeItemsPage6() {
 	
-	//SPECIALIST ITEMS
+	//GRANDMASTER ITEMS
 	inv1.setItem(4, createGuiItem(Material.NETHER_STAR, ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "GRANDMASTER",
 			ChatColor.RED + "Level 100+"));
 	
@@ -362,63 +367,16 @@ public static void initializeItemsPage6() {
 			ChatColor.YELLOW + "Trader:",
 			ChatColor.DARK_GRAY + "???"));
 	
+	inv1.setItem(31, createGuiItem(Material.RECOVERY_COMPASS, ChatColor.DARK_AQUA + "Grandmaster's World Jumper",
+			ChatColor.GRAY + "Set 3 personal warps",
+			"",
+			ChatColor.YELLOW + "Trader:",
+			ChatColor.DARK_GRAY + "???"));
+	
 	
 	inv1.setItem(45, createGuiItem(Material.RED_WOOL, ChatColor.RED + "" + ChatColor.BOLD + "GO BACK"));
 	inv1.setItem(49, createGuiItem(Material.BARRIER, ChatColor.DARK_RED + "" + ChatColor.BOLD + "EXIT"));
 }
-	
-	protected static ItemStack createGuiItem(final Material material, final String name, final String... lore) {
-		final ItemStack item = new ItemStack(material, 1);
-		final ItemMeta meta = item.getItemMeta();
-		
-		//set the name of item
-		meta.setDisplayName(name);
-		
-		//set lore of item
-		meta.setLore(Arrays.asList(lore));
-		
-		item.setItemMeta(meta);
-		
-		return item;
-	}
-	
-	protected static ItemStack createGuiItemEnchantment(final Material material, Enchantment enchantment, int enchantLevel, boolean showEnchant, final String name, final String... lore) {
-		final ItemStack item = new ItemStack(material, 1);
-		final ItemMeta meta = item.getItemMeta();
-		
-		meta.addEnchant(enchantment, enchantLevel, showEnchant);
-		
-		//set the name of item
-		meta.setDisplayName(name);
-		
-		//set lore of item
-		meta.setLore(Arrays.asList(lore));
-		
-		item.setItemMeta(meta);
-		
-		return item;
-	}
-	
-	protected static ItemStack createGuiItemTwoEnchantment(final Material material, Enchantment enchantment, int enchantLevel, boolean showEnchant, 
-			Enchantment enchantment2, int enchantLevel2, boolean showEnchant2, final String name, final String... lore) {
-		
-		final ItemStack item = new ItemStack(material, 1);
-		final ItemMeta meta = item.getItemMeta();
-		
-		meta.addEnchant(enchantment, enchantLevel, showEnchant);
-		
-		meta.addEnchant(enchantment2, enchantLevel2, showEnchant2);
-		
-		//set the name of item
-		meta.setDisplayName(name);
-		
-		//set lore of item
-		meta.setLore(Arrays.asList(lore));
-		
-		item.setItemMeta(meta);
-		
-		return item;
-	}
 	
 	public void openInventory(final HumanEntity ent, Inventory inv) {
 		ent.openInventory(inv);
@@ -426,7 +384,9 @@ public static void initializeItemsPage6() {
 	
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent event) {
-		if(!event.getInventory().equals(inv1)) return;
+		final Player p = (Player) event.getWhoClicked();
+		UUID playerUUID = p.getUniqueId();
+		if(!event.getInventory().equals(inventories.get(playerUUID))) return;
 		
 		event.setCancelled(true);
 		
@@ -434,27 +394,34 @@ public static void initializeItemsPage6() {
 		
 		String currentTitle = event.getView().getTitle();
 		
-		final Player p = (Player) event.getWhoClicked();
+		
+		//verify current item is not null
+		if (clickedItem == null || clickedItem.getType().isAir()) return;
 		
 		if(clickedItem.getType() == Material.LIME_WOOL) {
 			if(currentTitle.equals("OnlyVanilla Levels (Page 1/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 2/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage2();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 2/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 3/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage3();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 3/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 4/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage4();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 4/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 5/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage5();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 5/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 6/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage6();
 			}
@@ -463,22 +430,27 @@ public static void initializeItemsPage6() {
 		if(clickedItem.getType() == Material.RED_WOOL) {
 			if(currentTitle.equals("OnlyVanilla Levels (Page 2/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 1/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage1();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 3/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 2/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage2();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 4/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 3/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage3();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 5/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 4/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage4();
 			} else if(currentTitle.equals("OnlyVanilla Levels (Page 6/6)")) {
 				inv1 = Bukkit.createInventory(null, 54, "OnlyVanilla Levels (Page 5/6)");
+				inventories.put(playerUUID, inv1);
             	openInventory(p, inv1);
             	initializeItemsPage5();
 			}
@@ -487,22 +459,13 @@ public static void initializeItemsPage6() {
 		if(clickedItem.getType() == Material.BARRIER) {
 			p.closeInventory();
 		}
-		
-		//verify current item is not null
-		if (clickedItem == null || clickedItem.getType().isAir()) return;
 	}
 	
 	@EventHandler
 	public void onInventoryClick(final InventoryDragEvent event) {
-		if(event.getInventory().equals(inv1)) {
+		if(event.getInventory().equals(inventories.get(event.getWhoClicked().getUniqueId()))) {
 			event.setCancelled(true);
 		}
 	}
-	
-    @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
-    	HandlerList.unregisterAll(this);
-    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
-    }
 }
 

@@ -5,13 +5,15 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.commands.ovevote;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class sendVoteFinished extends BukkitRunnable{
+public class sendVoteFinished extends BukkitRunnable implements Listener{
     
 	//Main instance
 	private Main mainClass = Main.getInstance();
@@ -21,10 +23,14 @@ public class sendVoteFinished extends BukkitRunnable{
 	
 	//get eventdata fileconfiguration from mainclass
 	FileConfiguration eventData = mainClass.getEventData();
+	
+	ovevote ov1 = new ovevote();
 
 	@Override
-	public void run() {
+	public void run() {	
 		
+		ov1.clearAllInventories();
+
 		//will only run if 2 or more players are online
 		if(Bukkit.getServer().getOnlinePlayers().size() >= 0) {
 		

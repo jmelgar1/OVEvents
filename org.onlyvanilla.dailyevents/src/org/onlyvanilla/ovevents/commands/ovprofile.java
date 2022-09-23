@@ -1,8 +1,9 @@
 package org.onlyvanilla.ovevents.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -18,27 +19,27 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.inventory.InventoryManager;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.md_5.bungee.api.ChatColor;
 
-public class ovprofile implements Listener, CommandExecutor{
+public class ovprofile extends InventoryManager implements Listener, CommandExecutor{
 	
 	private static Inventory inv;
+	
+	public static Map<UUID, Inventory> inventories = new HashMap<UUID, Inventory>();
 	
 	//Luckperms api
 	static LuckPerms api = LuckPermsProvider.get();
@@ -62,11 +63,13 @@ public class ovprofile implements Listener, CommandExecutor{
 							  "Bad Bats", "Deep Diamonds", "Warden Warrior", "Cookie Clicker", "Nasty Netherite",
 							  "Precious Potatoes", "Hilarious Homicide", "Cow Tipper", "World War Z"};
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
 		Player p = (Player) sender;
         if(cmd.getName().equalsIgnoreCase("ovprofile")) { 	
+        	UUID playerUUID = p.getUniqueId();
         	if(args.length > 0) {
         		String IGN = args[0];
         		String uniqueIDString = Bukkit.getServer().getOfflinePlayer(IGN).getUniqueId().toString();
@@ -79,19 +82,22 @@ public class ovprofile implements Listener, CommandExecutor{
         			p.sendMessage(ChatColor.RED + IGN + " has never joined the server!");
         			
         		} else {
-        			inv = Bukkit.createInventory(null, 54, "OnlyVanilla Profile | " + IGN);
-                	openInventory(p);
+        			inv = Bukkit.createInventory(p, 54, "OnlyVanilla Profile | " + IGN);
+        			inventories.put(playerUUID, inv);
+                	openInventory(p, inventories.get(playerUUID));
                 	initializeItems(IGN);
         		}
         	} else {
-        		inv = Bukkit.createInventory(null, 54, "OnlyVanilla Profile | " + p.getName());
-            	openInventory(p);
+        		inv = Bukkit.createInventory(p, 54, "OnlyVanilla Profile | " + p.getName());
+        		inventories.put(playerUUID, inv);
+            	openInventory(p, inventories.get(playerUUID));
             	initializeItems(p.getName());
         	}
         }	
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void initializeItems(String IGN) {
 		
 	//user data
@@ -186,56 +192,15 @@ public class ovprofile implements Listener, CommandExecutor{
 		}	
 	}
 	
-	protected static ItemStack createGuiItem(final Material material, final String name, final String... lore) {
-		final ItemStack item = new ItemStack(material, 1);
-		final ItemMeta meta = item.getItemMeta();
-		
-		//set the name of item
-		meta.setDisplayName(name);
-		
-		//set lore of item
-		meta.setLore(Arrays.asList(lore));
-		
-		item.setItemMeta(meta);
-		
-		return item;
-	}
-	
-	protected static ItemStack createBannerItem(final ItemStack itemStack, final String name, final String... lore) {
-		final ItemMeta meta = itemStack.getItemMeta();
-		
-		//set the name of item
-		meta.setDisplayName(name);
-		
-		//set lore of item
-		meta.setLore(Arrays.asList(lore));
-		
-		itemStack.setItemMeta(meta);
-		
-		return itemStack;
-	}
-	
-    protected static ItemStack createGuiSkull(final ItemStack skull, final String name, final String... lore) {
-    	final ItemMeta meta = skull.getItemMeta();
-    	
-    	meta.setDisplayName(name);
-    	
-    	meta.setLore(Arrays.asList(lore));
-    	
-    	meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-    	
-    	skull.setItemMeta(meta);
-    	
-    	return skull;
-    }
-	
-	public void openInventory(final HumanEntity ent) {
+	public void openInventory(final HumanEntity ent, Inventory inv) {
 		ent.openInventory(inv);
 	}
 	
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent event) {
-		if(!event.getInventory().equals(inv)) return;
+		final Player p = (Player) event.getWhoClicked();
+		UUID playerUUID = p.getUniqueId();
+		if(!event.getInventory().equals(inventories.get(playerUUID))) return;
 		
 		event.setCancelled(true);
 		
@@ -243,22 +208,16 @@ public class ovprofile implements Listener, CommandExecutor{
 		
 		//verify current item is not null
 		if (clickedItem == null || clickedItem.getType().isAir()) return;
-		
-		final Player p = (Player) event.getWhoClicked();
 	}
 	
 	@EventHandler
 	public void onInventoryClick(final InventoryDragEvent event) {
-		if(event.getInventory().equals(inv)) {
+		final Player p = (Player) event.getWhoClicked();
+		UUID playerUUID = p.getUniqueId();
+		if(event.getInventory().equals(inventories.get(playerUUID))) {
 			event.setCancelled(true);
 		}
 	}
-	
-//    @EventHandler
-//    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
-//    	HandlerList.unregisterAll(this);
-//    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
-//    }
     
     //create red vs blue banner
     public static ItemStack redvsblueBanner() {
@@ -280,7 +239,8 @@ public class ovprofile implements Listener, CommandExecutor{
     	return itemStack;
     }
     
-    public static String getPlayerGroup(String username) {
+    @SuppressWarnings("deprecation")
+	public static String getPlayerGroup(String username) {
 		//Find user group
 		UUID userUUID = Bukkit.getOfflinePlayer(username).getUniqueId();
 		User user = api.getUserManager().loadUser(userUUID).join();

@@ -92,7 +92,8 @@ public class playerEvents implements Listener {
 	}
 	
 	//get player rank
-    public static String getPlayerGroup(String username) {
+    @SuppressWarnings("deprecation")
+	public static String getPlayerGroup(String username) {
 		//Find user group
 		UUID userUUID = Bukkit.getOfflinePlayer(username).getUniqueId();
 		User user = api.getUserManager().loadUser(userUUID).join();

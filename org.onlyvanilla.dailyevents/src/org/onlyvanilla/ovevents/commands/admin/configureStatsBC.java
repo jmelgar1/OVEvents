@@ -1,7 +1,6 @@
 package org.onlyvanilla.ovevents.commands.admin;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -63,6 +62,7 @@ public class configureStatsBC implements CommandExecutor, Listener{
 	}
 	
 	//create champions tour inventory
+	@SuppressWarnings("deprecation")
 	public static void initializeBuildCompetitionItems(String IGN) {
 	//player head info
 	ItemStack skull = new ItemStack(Material.PLAYER_HEAD);

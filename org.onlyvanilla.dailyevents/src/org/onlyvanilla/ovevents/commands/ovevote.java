@@ -1,9 +1,9 @@
 package org.onlyvanilla.ovevents.commands;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,20 +15,18 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.inventory.InventoryManager;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class ovevote implements CommandExecutor, Listener{
+public class ovevote extends InventoryManager implements CommandExecutor, Listener{
 	
 	//Main instance
 	public static Main mainClass = Main.getInstance();
@@ -36,6 +34,8 @@ public class ovevote implements CommandExecutor, Listener{
 	static DetermineEventData dev1 = new DetermineEventData();
 	
 	private static Inventory inv;
+	
+	public static Map<UUID, Inventory> inventories = new HashMap<UUID, Inventory>();
 	
     //create empty hashmap for voting
     static Map<String, ConfigurationSection> eventVote = new HashMap<String, ConfigurationSection>();
@@ -45,11 +45,14 @@ public class ovevote implements CommandExecutor, Listener{
     	int eventID = mainClass.getEventData().getInt("eventid");
     	
         Player p = (Player) sender;
-            if(cmd.getName().equalsIgnoreCase("ovevote")) {
+            if(cmd.getName().equalsIgnoreCase("ovevote")) {     	
+            	UUID playerUUID = p.getUniqueId();
+            	
             	if(eventID != 0) {
             		if(checkIfSignedUp(p) == false){
-                		inv = Bukkit.createInventory(null, 9, "OnlyVanilla | Daily Event Vote");
-                    	openInventory(p);
+                		inv = Bukkit.createInventory(p, 9, "OnlyVanilla | Daily Event Vote");
+                		inventories.put(playerUUID, inv);
+                    	openInventory(p, inventories.get(playerUUID));
                     	initalizeItems();
                 	} else {
                 		p.sendMessage(mainClass.prefix + ChatColor.RED + "You already voted!");
@@ -100,27 +103,16 @@ public class ovevote implements CommandExecutor, Listener{
     		inventorySlot++;
     	}
     }
-   
-    protected static ItemStack createGuiItem(final Material material, final String name, final String... lore) {
-    	final ItemStack item = new ItemStack(material, 1);
-    	final ItemMeta meta = item.getItemMeta();
-    	
-    	meta.setDisplayName(name);
-    	
-    	meta.setLore(Arrays.asList(lore));
-    	
-    	item.setItemMeta(meta);
-    	
-    	return item;
-    }
     
-    public void openInventory(final HumanEntity ent) {
+    public void openInventory(final HumanEntity ent, Inventory inv) {
     	ent.openInventory(inv);
     }
     
     @EventHandler
     public void onInventoryClick(final InventoryClickEvent e) {
-        if (!e.getInventory().equals(inv)) return;
+    	final Player p = (Player) e.getWhoClicked();
+		UUID playerUUID = p.getUniqueId();
+		if(!e.getInventory().equals(inventories.get(playerUUID))) return;
         
     	e.setCancelled(true);
     	
@@ -129,9 +121,6 @@ public class ovevote implements CommandExecutor, Listener{
         // verify current item is not null
         if (clickedItem == null || clickedItem.getType().isAir()) return;
         
-
-        final Player p = (Player) e.getWhoClicked();
-
         //get the itemname
         String itemName = ChatColor.stripColor(clickedItem.getItemMeta().getDisplayName());
         
@@ -152,15 +141,9 @@ public class ovevote implements CommandExecutor, Listener{
     
     @EventHandler
     public void onInventoryClick(final InventoryDragEvent e) {
-        if (e.getInventory().equals(inv)) {
-          e.setCancelled(true);
-        }
-    }
-    
-    @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
-    	HandlerList.unregisterAll(this);
-    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
+		if(e.getInventory().equals(inventories.get(e.getWhoClicked().getUniqueId()))) {
+			e.setCancelled(true);
+		}
     }
     
     //add player to event list
@@ -187,5 +170,15 @@ public class ovevote implements CommandExecutor, Listener{
 			}
     	}
 		return false;
+	}
+	
+	public void clearAllInventories() {
+		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+			UUID playerUUID = p.getUniqueId();
+			Inventory voteInv = inventories.get(playerUUID);
+			if(voteInv != null) {
+				voteInv.clear();
+			}
+		}
 	}
 }

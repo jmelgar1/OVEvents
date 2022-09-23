@@ -7,12 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovevote;
@@ -28,6 +24,7 @@ import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
+import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
@@ -121,10 +118,12 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new configureStatsRVB(), this);
 			getServer().getPluginManager().registerEvents(new EditPlayerPoints(), this);
 			getServer().getPluginManager().registerEvents(new ovevote(), this);
+
+			//runnable events
+			getServer().getPluginManager().registerEvents(new sendVoteFinished(), this);
 			
 			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			dailyVote.run();
-			
 			
 			//use this to prevent players from using items that they cant use
 			//testRunnable();
@@ -245,19 +244,4 @@ public class Main extends JavaPlugin implements Listener{
 			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			dailyVote.runTaskLater(this, 240);
 		}
-		
-//		public void testRunnable() {
-//			new BukkitRunnable() {
-//				@SuppressWarnings("deprecation")
-//				public void run() {
-//					for(Player p : Bukkit.getOnlinePlayers()) {
-//						System.out.println("checkling for pickaxe");
-//						if(p.getItemInHand().getItemMeta().getLore().contains(ChatColor.RED + "Level 100+")) {
-//							ItemStack item = p.getItemInHand();
-//							p.getInventory().removeItem(item);
-//						}
-//					}
-//				}
-//			}.runTaskTimer(this, 1l, 1l);
-//		}
 	}

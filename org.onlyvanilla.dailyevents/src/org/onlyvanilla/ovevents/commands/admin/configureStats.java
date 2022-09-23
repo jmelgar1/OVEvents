@@ -47,6 +47,7 @@ public class configureStats implements CommandExecutor, Listener {
      //Get playerdataconfig
 	static FileConfiguration playerDataConfig = mainClass.getPlayerData();
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		
@@ -69,6 +70,7 @@ public class configureStats implements CommandExecutor, Listener {
 	}
 	
 	//create main menu inventory
+	@SuppressWarnings("deprecation")
 	public static void initializeMenuItems(String IGN) {
 	//player head info
 	ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
@@ -90,6 +92,7 @@ public class configureStats implements CommandExecutor, Listener {
 	}
 	
 	//create champions tour inventory
+	@SuppressWarnings("deprecation")
 	public static void initializeChampionsTourItems(String IGN) {
 	//player head info
 	ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
@@ -131,6 +134,7 @@ public class configureStats implements CommandExecutor, Listener {
 	}
 	
 	//create champions tour inventory
+	@SuppressWarnings("deprecation")
 	public static void initializeBuildCompetitionItems(String IGN) {
 	//player head info
 	ItemStack skull = new ItemStack(Material.PLAYER_HEAD);

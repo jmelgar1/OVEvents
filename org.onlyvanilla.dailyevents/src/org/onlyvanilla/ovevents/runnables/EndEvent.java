@@ -52,8 +52,7 @@ public class EndEvent extends BukkitRunnable{
 				
 				String playerUUIDString = Bukkit.getPlayer(entry.getKey()).getUniqueId().toString();
 				System.out.println(playerUUIDString);
-				Player p = Bukkit.getServer().getPlayer(entry.getKey());
-				
+
 				Bukkit.broadcastMessage(ChatColor.GOLD + "" + counter + ". " + ChatColor.YELLOW + entry.getKey() + ChatColor.GOLD + " - " + ChatColor.GRAY + entry.getValue());
 				
 				ConfigurationSection playerDataConfig = mainClass.getPlayerData();

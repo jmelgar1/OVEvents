@@ -26,12 +26,18 @@ public class DailyEvents implements Listener {
 	
 	//register and unregister events
 	public void registerEvents() {
-		Bukkit.broadcastMessage("Event registered");
-		Bukkit.getServer().getPluginManager().registerEvents(this, mainClass);
+		try{
+			Bukkit.getServer().getPluginManager().registerEvents(this, mainClass);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	public void unregisterEvents() {
-		Bukkit.broadcastMessage("Event unregistered");
-		HandlerList.unregisterAll(this);
+		try{
+			HandlerList.unregisterAll(this);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }

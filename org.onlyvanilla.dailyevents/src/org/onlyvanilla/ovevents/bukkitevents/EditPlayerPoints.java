@@ -23,7 +23,8 @@ public class EditPlayerPoints implements Listener{
 	//Get playerdataconfig
 	FileConfiguration playerDataConfig = mainClass.getPlayerData();
 	
-    public void addPoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
+    @SuppressWarnings("deprecation")
+	public void addPoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
 		//get firstplace count
 		standingCount = eventSection.getInt(standingKey);	
 
@@ -42,7 +43,8 @@ public class EditPlayerPoints implements Listener{
 		mainClass.savePlayerDataFile();
     }
     
-    public void removePoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
+    @SuppressWarnings("deprecation")
+	public void removePoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
 		//get firstplace count
 		standingCount = eventSection.getInt(standingKey);	
 
@@ -147,15 +149,14 @@ public class EditPlayerPoints implements Listener{
     }
     
     void sendRankupNotification(Player p, String rank, ChatColor color, int playerLevel) {
-    	p.sendMessage("");
-		p.sendMessage(ChatColor.GRAY + "---- " + color + "" + ChatColor.BOLD + "LEVEL " + playerLevel + " " + rank + ChatColor.GRAY + " -----");
+    	p.sendTitle(ChatColor.GOLD + "" + ChatColor.BOLD + "RANKUP", color + "Level " + playerLevel + " " + rank, 35, 60, 35);
 		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1F, 1F);
     }
     
     void sendRankupNotificationToServer(String rank, String playerName, ChatColor color) {
 		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 			p.sendMessage("");
-			p.sendMessage(ChatColor.LIGHT_PURPLE + playerName + " has ranked up to " + color + "" + ChatColor.BOLD + " " + rank);
+			p.sendMessage(ChatColor.LIGHT_PURPLE + playerName + " has ranked up to " + color + "" + ChatColor.BOLD + rank);
 			p.sendMessage("");
 			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1F, 1F);
 		}
@@ -192,7 +193,8 @@ public class EditPlayerPoints implements Listener{
 		}
     }
     
-    public ConfigurationSection getBigEventSection(String IGN, String eventKey) {
+    @SuppressWarnings("deprecation")
+	public ConfigurationSection getBigEventSection(String IGN, String eventKey) {
 		//player name to uuid
 		UUID playerUUID = Bukkit.getServer().getOfflinePlayer(IGN).getUniqueId();
 		

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.onlyvanilla.ovevents.Main;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
-import org.onlyvanilla.ovevents.events.DailyEvents;
+import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;

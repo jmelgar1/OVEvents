@@ -7,7 +7,6 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.events.DailyEvents;
 import org.onlyvanilla.ovevents.events.craftingevents.CookieClicker;
 import org.onlyvanilla.ovevents.events.damageevents.DragonSlayer;
 import org.onlyvanilla.ovevents.events.fishingevents.FishFrenzy;
@@ -19,6 +18,7 @@ import org.onlyvanilla.ovevents.events.killingevents.HilariousHomicide;
 import org.onlyvanilla.ovevents.events.killingevents.ShulkerHunt;
 import org.onlyvanilla.ovevents.events.killingevents.WardenWarrior;
 import org.onlyvanilla.ovevents.events.killingevents.WorldWarZ;
+import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;

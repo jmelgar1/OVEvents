@@ -28,7 +28,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.inventory.InventoryManager;
+import org.onlyvanilla.ovevents.managers.InventoryManager;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;

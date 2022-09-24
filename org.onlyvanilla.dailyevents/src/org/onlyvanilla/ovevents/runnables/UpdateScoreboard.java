@@ -13,7 +13,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.events.DailyEvents;
+import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 
 import net.md_5.bungee.api.ChatColor;
 

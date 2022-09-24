@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
+import org.onlyvanilla.ovevents.bukkitevents.PreventItemUsage;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovevote;
 import org.onlyvanilla.ovevents.commands.ovlevels;
@@ -22,6 +23,7 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
+import org.onlyvanilla.ovevents.runnables.CheckRestrictedItems;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
@@ -118,6 +120,7 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new configureStatsRVB(), this);
 			getServer().getPluginManager().registerEvents(new EditPlayerPoints(), this);
 			getServer().getPluginManager().registerEvents(new ovevote(), this);
+			getServer().getPluginManager().registerEvents(new PreventItemUsage(), this);
 
 			//runnable events
 			getServer().getPluginManager().registerEvents(new sendVoteFinished(), this);
@@ -125,8 +128,8 @@ public class Main extends JavaPlugin implements Listener{
 			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			dailyVote.run();
 			
-			//use this to prevent players from using items that they cant use
-			//testRunnable();
+//			CheckRestrictedItems checkItems = new CheckRestrictedItems();
+//			checkItems.run();
 		}
 		
 		@Override

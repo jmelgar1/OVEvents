@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.inventory;
+package org.onlyvanilla.ovevents.managers;
 
 import java.util.Arrays;
 import java.util.HashMap;

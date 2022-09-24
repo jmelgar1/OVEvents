@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.events;
+package org.onlyvanilla.ovevents.smalleventmanager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;

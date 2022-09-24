@@ -19,7 +19,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.onlyvanilla.ovevents.inventory.InventoryManager;
+import org.onlyvanilla.ovevents.managers.InventoryManager;
 
 public class ovlevels extends InventoryManager implements Listener, CommandExecutor{
 	

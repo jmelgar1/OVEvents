@@ -9,8 +9,8 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.onlyvanilla.ovevents.events.DailyEvents;
 import org.onlyvanilla.ovevents.runnables.UpdateScoreboard;
+import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 
 public class CookieClicker extends DailyEvents implements Listener {
 	

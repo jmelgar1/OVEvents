@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -24,57 +25,57 @@ public class CheckRestrictedItems extends BukkitRunnable {
 	
 	//Luckperms api
 	LuckPerms api = LuckPermsProvider.get();
+	
+	Group grandmaster = api.getGroupManager().getGroup("grandmaster");
+	Group master = api.getGroupManager().getGroup("master");
+	Group elite = api.getGroupManager().getGroup("elite");
+	Group expert = api.getGroupManager().getGroup("expert");
+	Group specialist = api.getGroupManager().getGroup("specialist");
+	Group veteran = api.getGroupManager().getGroup("veteran");
+	Group skilled = api.getGroupManager().getGroup("skilled");
+	Group adept = api.getGroupManager().getGroup("adept");
+	Group initiate = api.getGroupManager().getGroup("initiate");
+	Group apprentice = api.getGroupManager().getGroup("apprentice");
+	Group novice = api.getGroupManager().getGroup("novice");
 
 	@Override
 	public void run() {
 		new BukkitRunnable() {
-			@SuppressWarnings({ "deprecation", "unlikely-arg-type" })
+			@SuppressWarnings("deprecation")
 			public void run() {
 				
 				//use playerinteractevent instead. Maybe just prevent player from left clicking instead of deleting item.
 				
 				for(Player p : Bukkit.getOnlinePlayers()) {
-					ItemStack item = p.getItemInHand();
-					List<String> itemLore = item.getItemMeta().getLore();
-					if(itemLore.contains(ChatColor.RED + "Level 100+")) {
-						if(!findGroups(p).contains("grandmaster")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 90+")) {
-						if(!findGroups(p).contains("master")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 80+")) {
-						if(!findGroups(p).contains("elite")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 70+")) {
-						if(!findGroups(p).contains("expert")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 60+")) {
-						if(!findGroups(p).contains("specialist")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 50+")) {
-						if(!findGroups(p).contains("veteran")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 40+")) {
-						if(!findGroups(p).contains("skilled")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 30+")) {
-						if(!findGroups(p).contains("adept")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 20+")) {
-						if(!findGroups(p).contains("initiate")) {
-							p.getInventory().removeItem(item);
-						}
-					} else if(itemLore.contains(ChatColor.RED + "Level 10+")) {
-						if(!findGroups(p).contains("apprentice")) {
-							p.getInventory().removeItem(item);
+					if(p.getItemInHand() != null) {
+						
+						ItemStack item = p.getItemInHand();
+						Material material = item.getType();
+						
+						if(material == Material.NETHERITE_AXE
+								|| material == Material.NETHERITE_PICKAXE
+								|| material == Material.NETHERITE_SWORD
+								|| material == Material.NETHERITE_HELMET
+								|| material == Material.NETHERITE_BOOTS
+								|| material == Material.FISHING_ROD
+								|| material == Material.ELYTRA
+								|| material == Material.BOW
+								|| material == Material.RECOVERY_COMPASS) {
+					
+							List<String> itemLore = item.getItemMeta().getLore();
+							
+							if(itemLore != null) {
+								checkForItem(p, item, itemLore, "100", grandmaster);
+								checkForItem(p, item, itemLore, "90", master);
+								checkForItem(p, item, itemLore, "80", elite);
+								checkForItem(p, item, itemLore, "70", expert);
+								checkForItem(p, item, itemLore, "60", specialist);
+								checkForItem(p, item, itemLore, "50", veteran);
+								checkForItem(p, item, itemLore, "40", skilled);
+								checkForItem(p, item, itemLore, "30", adept);
+								checkForItem(p, item, itemLore, "20", initiate);
+								checkForItem(p, item, itemLore, "10", apprentice);
+							}
 						}
 					}
 				}
@@ -82,8 +83,17 @@ public class CheckRestrictedItems extends BukkitRunnable {
 		}.runTaskTimer(mainClass, 1l, 1l);
 	}
 	
+	void checkForItem(Player p, ItemStack item, List<String> itemLore, String level, Group rank){
+		if(itemLore.contains(ChatColor.RED + "Level " + level + "+")) {
+			if(!findGroups(p).contains(rank)) {
+				p.getInventory().removeItem(item);
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You must be level " + level + "+ to use this!");
+			}
+		}
+	}
+	
 	@SuppressWarnings("deprecation")
-	public Collection<Group> findGroups(Player p) {		
+	Collection<Group> findGroups(Player p) {		
 		UUID userUUID = Bukkit.getOfflinePlayer(p.getName()).getUniqueId();
 		User user = api.getUserManager().loadUser(userUUID).join();
 		

@@ -21,8 +21,8 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.managers.InventoryManager;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 

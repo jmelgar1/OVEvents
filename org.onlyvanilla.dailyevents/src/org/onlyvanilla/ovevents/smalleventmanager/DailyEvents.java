@@ -5,8 +5,12 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
+
+import net.coreprotect.CoreProtect;
+import net.coreprotect.CoreProtectAPI;
 
 public class DailyEvents implements Listener {
 	
@@ -40,4 +44,27 @@ public class DailyEvents implements Listener {
 			System.out.println(e);
 		}
 	}
+	
+	//FOR MINING EVENTS
+	protected CoreProtectAPI getCoreProtect() {
+        Plugin plugin = mainClass.getServer().getPluginManager().getPlugin("CoreProtect");
+
+        // Check that CoreProtect is loaded
+        if (plugin == null || !(plugin instanceof CoreProtect)) {
+            return null;
+        }
+
+        // Check that the API is enabled
+        CoreProtectAPI CoreProtect = ((CoreProtect) plugin).getAPI();
+        if (CoreProtect.isEnabled() == false) {
+            return null;
+        }
+
+        // Check that a compatible version of the API is loaded
+        if (CoreProtect.APIVersion() < 9) {
+            return null;
+        }
+
+        return CoreProtect;
+}
 }

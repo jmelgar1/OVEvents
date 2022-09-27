@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.smallevents;
+package org.onlyvanilla.ovevents.managers;
 
 import java.util.ArrayList;
 import java.util.Collections;

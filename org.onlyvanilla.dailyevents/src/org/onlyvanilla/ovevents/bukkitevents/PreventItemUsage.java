@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -56,21 +58,26 @@ public class PreventItemUsage implements Listener {
 	//prevent damaging mobs/players
 	@EventHandler
 	public void onPlayerDamage(EntityDamageByEntityEvent e) {
-		Player p = (Player) e.getDamager();
+		Player p = null;
+		if(e.getDamager().getType() == EntityType.PLAYER) {
+			p = (Player) e.getDamager();
+		}
 		
-		if(p.getItemInHand() != null) {
-			
-			ItemStack item = p.getItemInHand();
-			Material material = item.getType();
-			
-			if(toolMaterials.contains(material)) {
-		
-				List<String> itemLore = item.getItemMeta().getLore();
+		if(p != null) {
+			if(p.getItemInHand() != null) {
 				
-				if(itemLore != null) {
-					for(int i = 0; i < 10; i++) {
-						if(cancelCheck(p, itemLore, levels[i], groups[i]) == true) {
-							e.setCancelled(true);
+				ItemStack item = p.getItemInHand();
+				Material material = item.getType();
+				
+				if(toolMaterials.contains(material)) {
+			
+					List<String> itemLore = item.getItemMeta().getLore();
+					
+					if(itemLore != null) {
+						for(int i = 0; i < 10; i++) {
+							if(cancelCheck(p, itemLore, levels[i], groups[i]) == true) {
+								e.setCancelled(true);
+							}	
 						}
 					}
 				}

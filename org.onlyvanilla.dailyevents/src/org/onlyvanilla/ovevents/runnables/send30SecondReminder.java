@@ -4,7 +4,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
 
 
 public class send30SecondReminder extends BukkitRunnable{

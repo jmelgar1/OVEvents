@@ -7,6 +7,10 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.events.blockbreakevents.CrazyCarrots;
+import org.onlyvanilla.ovevents.events.blockbreakevents.DeepDiamonds;
+import org.onlyvanilla.ovevents.events.blockbreakevents.NastyNetherite;
+import org.onlyvanilla.ovevents.events.blockbreakevents.PreciousPotatoes;
 import org.onlyvanilla.ovevents.events.craftingevents.CookieClicker;
 import org.onlyvanilla.ovevents.events.damageevents.DragonSlayer;
 import org.onlyvanilla.ovevents.events.fishingevents.FishFrenzy;
@@ -18,8 +22,8 @@ import org.onlyvanilla.ovevents.events.killingevents.HilariousHomicide;
 import org.onlyvanilla.ovevents.events.killingevents.ShulkerHunt;
 import org.onlyvanilla.ovevents.events.killingevents.WardenWarrior;
 import org.onlyvanilla.ovevents.events.killingevents.WorldWarZ;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -43,6 +47,10 @@ public class StartEvent extends BukkitRunnable{
 	//create empty scoreboard title name
 	String scoreboardTitle;
 	
+	long tenMinutes = 12000;
+	long twentyMinutes = 24000;
+	long thirtyMinutes = 36000;
+	
 	@Override
 	public void run() { 
 		
@@ -63,7 +71,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, twentyMinutes);
 			
 		} else if (winningEventNS.equals("ShulkerHunt")) {
 			ShulkerHunt shulkerHunt = new ShulkerHunt();
@@ -78,7 +86,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, thirtyMinutes);
 			
 		} else if (winningEventNS.equals("BadBats")) {
 			BadBats badBats = new BadBats();
@@ -93,7 +101,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("HilariousHomicide")) {
 			HilariousHomicide hilariousHomicide = new HilariousHomicide();
@@ -108,7 +116,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, twentyMinutes);
 			
 		} else if (winningEventNS.equals("WorldWarZ")) {
 			WorldWarZ worldWarZ = new WorldWarZ();
@@ -123,7 +131,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, twentyMinutes);
 			
 		} else if (winningEventNS.equals("WardenWarrior")) {
 			WardenWarrior wardenWarrior = new WardenWarrior();
@@ -138,7 +146,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 2 hours
-			endEvent.runTaskLater(mainClass, 144000);
+			endEvent.runTaskLater(mainClass, thirtyMinutes);
 			
 		} else if (winningEventNS.equals("FishFrenzy")){
 			FishFrenzy fishFrenzy = new FishFrenzy();
@@ -153,7 +161,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("CowTipper")){
 			CowTipper cowTipper = new CowTipper();
@@ -168,7 +176,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("BringHomeTheBacon")){
 			BringHomeTheBacon bringHomeTheBacon = new BringHomeTheBacon();
@@ -183,7 +191,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("CookieClicker")){
 			CookieClicker cookieClicker = new CookieClicker();
@@ -198,7 +206,7 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 24000);
+			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("DragonSlayer")){
 			DragonSlayer dragonSlayer = new DragonSlayer();
@@ -213,7 +221,64 @@ public class StartEvent extends BukkitRunnable{
 			}
 			
 			//end event after 20 minutes
-			endEvent.runTaskLater(mainClass, 72000);
+			endEvent.runTaskLater(mainClass, thirtyMinutes);
+			
+		} else if (winningEventNS.equals("DeepDiamonds")){
+			DeepDiamonds deepDiamonds = new DeepDiamonds();
+			
+			eventWinnerClass = deepDiamonds;
+			
+			scoreboardTitle = ChatColor.AQUA + "" + ChatColor.BOLD + "DEEP DIAMONDS";
+			createScoreboard(deepDiamonds);
+			
+			if(allOnline == true) {
+				deepDiamonds.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, thirtyMinutes);
+		} else if (winningEventNS.equals("NastyNetherite")){
+			NastyNetherite nastyNetherite = new NastyNetherite();
+			
+			eventWinnerClass = nastyNetherite;
+			
+			scoreboardTitle = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "NASTY NETHERITE";
+			createScoreboard(nastyNetherite);
+			
+			if(allOnline == true) {
+				nastyNetherite.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, thirtyMinutes);
+		} else if (winningEventNS.equals("CrazyCarrots")){
+			CrazyCarrots crazyCarrots = new CrazyCarrots();
+			
+			eventWinnerClass = crazyCarrots;
+			
+			scoreboardTitle = ChatColor.YELLOW + "" + ChatColor.BOLD + "CRAZY CARROTS";
+			createScoreboard(crazyCarrots);
+			
+			if(allOnline == true) {
+				crazyCarrots.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, tenMinutes);
+		} else if (winningEventNS.equals("PreciousPotatoes")){
+			PreciousPotatoes preciousPotatoes = new PreciousPotatoes();
+			
+			eventWinnerClass = preciousPotatoes;
+			
+			scoreboardTitle = ChatColor.YELLOW + "" + ChatColor.BOLD + "PRECIOUS POTATOES";
+			createScoreboard(preciousPotatoes);
+			
+			if(allOnline == true) {
+				preciousPotatoes.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, tenMinutes);
 		}
 		
 		if(allOnline == false) {

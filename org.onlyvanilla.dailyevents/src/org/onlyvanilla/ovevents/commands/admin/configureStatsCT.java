@@ -179,10 +179,4 @@ public class configureStatsCT implements CommandExecutor, Listener{
 			event.setCancelled(true);
 		}
 	}
-	
-    @EventHandler
-    public void onInventoryClose(final InventoryCloseEvent e, Player p) {
-    	HandlerList.unregisterAll(this);
-    	Bukkit.getServer().getScheduler().runTaskLater(Main.getPlugin(Main.class), p::updateInventory, 1L);
-    }
 }

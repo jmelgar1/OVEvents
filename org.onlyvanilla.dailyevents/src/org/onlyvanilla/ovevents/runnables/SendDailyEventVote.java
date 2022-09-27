@@ -5,7 +5,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.onlyvanilla.ovevents.Main;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;

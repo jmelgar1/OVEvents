@@ -23,11 +23,11 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
+import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.runnables.CheckRestrictedItems;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
-import org.onlyvanilla.ovevents.smallevents.DetermineEventData;
 
 import net.md_5.bungee.api.ChatColor;
 

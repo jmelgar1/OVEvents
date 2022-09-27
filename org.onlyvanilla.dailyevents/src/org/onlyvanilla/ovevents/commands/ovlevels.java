@@ -271,7 +271,7 @@ public static void initializeItemsPage4() {
 			ChatColor.YELLOW + "Trader:",
 			ChatColor.DARK_GRAY + "???"));
 	
-	inv1.setItem(24, createGuiItemEnchantment(Material.NETHERITE_PICKAXE, Enchantment.LOOT_BONUS_BLOCKS, 6, true, ChatColor.LIGHT_PURPLE + "Expert's Pace Pickaxe",
+	inv1.setItem(24, createGuiItemEnchantment(Material.NETHERITE_PICKAXE, Enchantment.DIG_SPEED, 6, true, ChatColor.LIGHT_PURPLE + "Expert's Pace Pickaxe",
 			"",
 			ChatColor.YELLOW + "Trader:",
 			ChatColor.DARK_GRAY + "???"));	

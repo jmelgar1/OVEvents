@@ -98,9 +98,9 @@ public class EndEvent extends BukkitRunnable{
 			System.out.println(e);
 		}
 		
-		//send a new task in 20 minutes
+		//send a new task in 5 minutes
 		SendDailyEventVote sendDailyEventVote = new SendDailyEventVote();
-		sendDailyEventVote.runTaskLater(mainClass, 240);
+		sendDailyEventVote.runTaskLater(mainClass, 6000);
 		
 		//remove scoreboard
 		removeScoreboard();

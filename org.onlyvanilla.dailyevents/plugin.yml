@@ -47,4 +47,9 @@ commands:
         description: Force an event vote
         usage: /oveendvote
         permission: ove.endvote
+    ovegivexp:
+        description: Give player XP
+        usage: /ovegivexp
+        permission: ove.givexp
+        
         

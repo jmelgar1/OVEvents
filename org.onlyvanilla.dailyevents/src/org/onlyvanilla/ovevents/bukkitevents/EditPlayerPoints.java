@@ -72,10 +72,11 @@ public class EditPlayerPoints implements Listener{
     	
     	currentXP += XP;
     	
-    	double requiredXP = (Math.pow(playerLevel/0.71, 2.2));
+    	int requiredXP = (int)(Math.pow((playerLevel+1)/0.71, 2.2));
     	
     	while(currentXP >= requiredXP) {
     		playerLevel += 1;
+    		currentXP -= requiredXP;
     		
     		if(playerLevel >= 1 && playerLevel < 10) {
     			sendRankupNotification(p, "NOVICE", ChatColor.GRAY, playerLevel);
@@ -141,7 +142,7 @@ public class EditPlayerPoints implements Listener{
     			sendRankupNotification(p, "GRANDMASTER", ChatColor.DARK_AQUA, playerLevel);
     		}
     		
-    		requiredXP = (Math.pow(playerLevel/0.71, 2.2));
+    		requiredXP = (int)(Math.pow(playerLevel/0.71, 2.2));
     	}
     	
     	playerUUIDSection.set("level", playerLevel);
@@ -169,14 +170,14 @@ public class EditPlayerPoints implements Listener{
     	
     	currentXP -= XP;
     	
-    	double requiredXP = (Math.pow(playerLevel/0.71, 2.2));
+    	double requiredXP = (Math.pow((playerLevel-1)/0.71, 2.2));
     	
     	while(currentXP < requiredXP) {
     		if(playerLevel == 1) {
     			break;
     		} else {
     			playerLevel -= 1;
-        		requiredXP = (Math.pow(playerLevel/0.71, 2.2));
+        		requiredXP = (Math.pow((playerLevel-1)/0.71, 2.2));
     		}
     	}
     	

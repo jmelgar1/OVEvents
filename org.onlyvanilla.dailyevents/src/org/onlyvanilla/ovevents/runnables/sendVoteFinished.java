@@ -78,7 +78,7 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 				mainClass.reloadEventDataFile();
 				
 				send30SecondReminder secondReminder = new send30SecondReminder();
-				secondReminder.runTaskLater(mainClass, 200);
+				secondReminder.runTaskLater(mainClass, 3000);
 				
 			} else {
 				

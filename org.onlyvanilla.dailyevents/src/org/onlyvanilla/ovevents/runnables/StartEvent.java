@@ -1,12 +1,14 @@
 package org.onlyvanilla.ovevents.runnables;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
+import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.events.blockbreakevents.CrazyCarrots;
 import org.onlyvanilla.ovevents.events.blockbreakevents.DeepDiamonds;
 import org.onlyvanilla.ovevents.events.blockbreakevents.NastyNetherite;
@@ -36,6 +38,8 @@ public class StartEvent extends BukkitRunnable{
 	private Main mainClass = Main.getInstance();
 	
 	public DetermineEventData dev1 = new DetermineEventData();
+	
+	EditPlayerPoints editPlayerPoints = new EditPlayerPoints();
 	
 	//get winning event 
 	public String winningEvent = mainClass.dev1.getVotedEvent(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
@@ -190,7 +194,7 @@ public class StartEvent extends BukkitRunnable{
 				bringHomeTheBacon.registerEvents();
 			}
 			
-			//end event after 20 minutes
+			//end event after 10 minutes
 			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("CookieClicker")){
@@ -205,7 +209,7 @@ public class StartEvent extends BukkitRunnable{
 				cookieClicker.registerEvents();
 			}
 			
-			//end event after 20 minutes
+			//end event after 10 minutes
 			endEvent.runTaskLater(mainClass, tenMinutes);
 			
 		} else if (winningEventNS.equals("DragonSlayer")){
@@ -313,7 +317,15 @@ public class StartEvent extends BukkitRunnable{
 			
 			//if player leaves before event starts REMOVE FROM LIST!
 			if(p == null) {
-				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + s + " has left the game before the event started and therefore the event will be cancelled!");
+				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + s + " left the game before the event started and therefore the event will be cancelled!");
+				
+				String playerUUIDString = p.getUniqueId().toString();
+				
+				ConfigurationSection playerDataConfig = mainClass.getPlayerData();
+				ConfigurationSection playerUUID = playerDataConfig.getConfigurationSection(playerUUIDString);
+				
+				//remove 15 XP
+				editPlayerPoints.removeLevelXP(15, playerUUID);
 				
 				//cancel runnable if player is found not to be online
 				instance.cancel();

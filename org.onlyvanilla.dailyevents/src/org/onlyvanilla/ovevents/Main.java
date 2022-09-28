@@ -22,6 +22,7 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsMA;
 import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
+import org.onlyvanilla.ovevents.commands.admin.oveGiveXP;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
 import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.runnables.CheckRestrictedItems;
@@ -106,6 +107,7 @@ public class Main extends JavaPlugin implements Listener{
 			this.getCommand("overeload").setExecutor(new overeload());
 			this.getCommand("oveforcevote").setExecutor(new oveForceVote());
 			this.getCommand("oveendvote").setExecutor(new oveEndVote());
+			this.getCommand("ovegivexp").setExecutor(new oveGiveXP());
 			
 			//register events
 			getServer().getPluginManager().registerEvents(new ovprofile(), this);
@@ -125,17 +127,16 @@ public class Main extends JavaPlugin implements Listener{
 			//runnable events
 			getServer().getPluginManager().registerEvents(new sendVoteFinished(), this);
 			
+			//create new runnable to start the event cycle
 			SendDailyEventVote dailyVote = new SendDailyEventVote();
 			dailyVote.run();
-			
-//			CheckRestrictedItems checkItems = new CheckRestrictedItems();
-//			checkItems.run();
 		}
 		
 		@Override
 		public void onDisable() {
 			System.out.println("(!) OVEvents Disabled");
 			
+			//end event cycle
 			EndEvent endEvent = new EndEvent();
 			endEvent.run();
 			
@@ -243,8 +244,11 @@ public class Main extends JavaPlugin implements Listener{
 			return this.eventData;
 		}
 		
+		//send event notification every 20 minutes
 		public void runEventNotif20Minutes() {
 			SendDailyEventVote dailyVote = new SendDailyEventVote();
-			dailyVote.runTaskLater(this, 240);
+			
+			//checks every 5 minutes
+			dailyVote.runTaskLater(this, 6000);
 		}
 	}

@@ -46,7 +46,7 @@ public class EndEvent extends BukkitRunnable{
 		Bukkit.broadcastMessage(ChatColor.GRAY + "-----" + ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + " EVENT RESULTS!" + ChatColor.GRAY + "-----");
 		
 		int counter = 1;
-		int XPGiven = getDuration();
+		int XPGiven = getDuration()*2;
 		for(Map.Entry<String, Integer> entry : topScores1.entrySet()) {
 			if(counter < 4) {
 				

@@ -189,7 +189,7 @@ public class StartEvent extends BukkitRunnable{
 			
 			scoreboardTitle = ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "BRING HOME THE BACON";
 			createScoreboard(bringHomeTheBacon);
-			
+
 			if(allOnline == true) {
 				bringHomeTheBacon.registerEvents();
 			}
@@ -300,18 +300,24 @@ public class StartEvent extends BukkitRunnable{
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("OVEvents", "dummy", scoreboardTitle);
 		
-		obj.getScore(ChatColor.RESET.toString()).setScore(7);
-		obj.getScore(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Scores:").setScore(6);
+		obj.getScore(ChatColor.RESET.toString()).setScore(10);
+		obj.getScore(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Scores:").setScore(9);
 		
 		if(mainClass.getEventData().getStringList("participants").size() < 3) {
-			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(3);
-			obj.getScore(ChatColor.AQUA + "play.onlyvanilla.org").setScore(2);
-		} else {
-			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(2);
+			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(5);
+			obj.getScore(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Time Left:").setScore(4);
+			obj.getScore("time left").setScore(3);
+			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(2);
 			obj.getScore(ChatColor.AQUA + "play.onlyvanilla.org").setScore(1);
+		} else {
+			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(6);
+			obj.getScore(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "Time Left:").setScore(5);
+			obj.getScore("time left").setScore(4);
+			obj.getScore(ChatColor.RESET.toString() + ChatColor.RESET.toString() + ChatColor.RESET.toString()).setScore(3);
+			obj.getScore(ChatColor.AQUA + "play.onlyvanilla.org").setScore(2);
 		}
 		
-		int counter = 5;
+		int counter = 8;
 		for(String s : mainClass.getEventData().getStringList("participants")){
 			Player p = Bukkit.getPlayer(s);
 			
@@ -336,7 +342,7 @@ public class StartEvent extends BukkitRunnable{
 				obj.getScore(p.getName() + ": " + ChatColor.YELLOW + className.winningEventSection.getInt(p.getName())).setScore(counter);
 				counter--;
 			
-				if(counter == 2) {
+				if(counter == 5) {
 					break;
 				}
 			}
@@ -351,6 +357,10 @@ public class StartEvent extends BukkitRunnable{
 				p.setScoreboard(board);
 			}
 		}
+		
+		UpdateScoreboard updateScoreboard = new UpdateScoreboard();
+		updateScoreboard.setCountdown();
+		updateScoreboard.run();
 	}
 	
 	public void unregisterEvent(DailyEvents className) {

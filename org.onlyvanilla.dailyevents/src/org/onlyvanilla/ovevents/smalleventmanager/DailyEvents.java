@@ -23,12 +23,12 @@ public class DailyEvents implements Listener {
 	public String winningEvent = mainClass.dev1.getVotedEvent(mainClass.getSmallEvents(), mainClass.dev1.getList(), mainClass);
 	
 	//event data file from main class
-	FileConfiguration eventData = mainClass.getEventData();
+	public FileConfiguration eventData = mainClass.getEventData();
 	
 	ConfigurationSection currentEventSection = eventData.getConfigurationSection("current-event");
 	public ConfigurationSection winningEventSection = currentEventSection.getConfigurationSection(winningEvent);
 	
-	//register and unregister events
+	//register and unregister events1
 	public void registerEvents() {
 		try{
 			Bukkit.getServer().getPluginManager().registerEvents(this, mainClass);
@@ -66,5 +66,5 @@ public class DailyEvents implements Listener {
         }
 
         return CoreProtect;
-}
+	}
 }

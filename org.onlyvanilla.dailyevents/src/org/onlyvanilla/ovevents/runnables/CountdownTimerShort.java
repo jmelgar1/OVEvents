@@ -6,27 +6,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Consumer;
 
-public class CountdownTimer implements Runnable {
+public class CountdownTimerShort implements Runnable {
     // Main class for bukkit scheduling
     private JavaPlugin plugin;
 
     // Our scheduled task's assigned id, needed for canceling
     private Integer assignedTaskId;
 
-    // Seconds and shiz
+    // Seconds
     private int seconds;
     private int secondsLeft;
 
     // Actions to perform while counting down, before and after
-    private Consumer<CountdownTimer> everySecond;
+    private Consumer<CountdownTimerShort> everySecond;
     private Runnable beforeTimer;
     private Runnable afterTimer;
 
     // Construct a timer, you could create multiple so for example if
     // you do not want these "actions"
-    public CountdownTimer(JavaPlugin plugin, int seconds,
+    public CountdownTimerShort(JavaPlugin plugin, int seconds,
                           Runnable beforeTimer, Runnable afterTimer,
-                          Consumer<CountdownTimer> everySecond) {
+                          Consumer<CountdownTimerShort> everySecond) {
         // Initializing fields
         this.plugin = plugin;
 

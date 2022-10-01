@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.PreventItemUsage;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
+import org.onlyvanilla.ovevents.commands.ovehelp;
 import org.onlyvanilla.ovevents.commands.ovevote;
 import org.onlyvanilla.ovevents.commands.ovlevels;
 import org.onlyvanilla.ovevents.commands.ovprofile;
@@ -26,6 +27,8 @@ import org.onlyvanilla.ovevents.commands.admin.oveGiveXP;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
 import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.runnables.CheckRestrictedItems;
+import org.onlyvanilla.ovevents.runnables.CountdownTimerShort;
+import org.onlyvanilla.ovevents.runnables.CountdownTimerLong;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
@@ -97,6 +100,7 @@ public class Main extends JavaPlugin implements Listener{
 			this.getCommand("ovprofile").setExecutor(new ovprofile());
 			this.getCommand("ovevote").setExecutor(new ovevote());
 			this.getCommand("ovlevels").setExecutor(new ovlevels());
+			this.getCommand("ovehelp").setExecutor(new ovehelp());
 			
 			//admin commands
 			this.getCommand("configurestats").setExecutor(new configureStats());

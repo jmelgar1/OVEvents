@@ -57,6 +57,11 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 					p.sendMessage(mainClass.prefix + ChatColor.GREEN + "The voting time has expired and "
 							+ "the event will start in 3 minutes!");
 					
+					StartEventCountdown3Min threeMin = new StartEventCountdown3Min();
+					threeMin.runTaskTimer(mainClass, 0, 20);
+					
+					threeMin.addPlayer(p);
+					
 					//add participants to config file to track scores
 					winningEventSection.createSection(p.getName());
 					winningEventSection.set(p.getName(), 0);
@@ -83,9 +88,9 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 			} else {
 				
 				//if no one voted. try again in 20 minutes
-				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + "Not enough players voted for an event! Trying again in 20 minutes!");
+				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + "Not enough players voted for an event! Trying again in 10 minutes!");
 				SendDailyEventVote sendDailyEventVote = new SendDailyEventVote();
-				sendDailyEventVote.runTaskLater(mainClass, 24000);
+				sendDailyEventVote.runTaskLater(mainClass, 12000);
 			}
 		}
 	}

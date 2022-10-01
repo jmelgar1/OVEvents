@@ -6,6 +6,9 @@ website: www.onlyvanilla.org
 main: org.onlyvanilla.ovevents.Main
 description: OVEvents Commands
 commands:
+    ovehelp:
+        description: See help page
+        usage: /ovehelp
     ovprofile:
         description: Show OnlyVanilla profile
         usage: /ovprofile [user]

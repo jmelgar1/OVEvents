@@ -15,10 +15,6 @@ import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 import net.coreprotect.CoreProtectAPI;
 
 public class PreciousPotatoes extends DailyEvents implements Listener {
-	
-	//takes about a second to log a block. If player places diamond_ore. dont let player break that ore for 1-2 seconds.
-	
-	CoreProtectAPI api = getCoreProtect();
 
 	@EventHandler
 	public void breakDiamond(BlockBreakEvent e) {

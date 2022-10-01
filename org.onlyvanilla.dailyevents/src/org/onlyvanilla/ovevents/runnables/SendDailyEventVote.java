@@ -53,7 +53,7 @@ public class SendDailyEventVote extends BukkitRunnable{
 			}
 			
 			sendVoteFinished voteFinished = new sendVoteFinished();
-			voteFinished.runTaskLater(mainClass, 200);
+			voteFinished.runTaskLater(mainClass, 2400);
 			
 		} else {
 			System.out.println("[OVEvents] Tried to send event vote. Less than 2 players online. Trying again in 5 minutes.");

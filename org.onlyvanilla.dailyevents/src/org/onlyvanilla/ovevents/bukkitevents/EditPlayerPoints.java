@@ -78,68 +78,70 @@ public class EditPlayerPoints implements Listener{
     		playerLevel += 1;
     		currentXP -= requiredXP;
     		
-    		if(playerLevel >= 1 && playerLevel < 10) {
-    			sendRankupNotification(p, "NOVICE", ChatColor.GRAY, playerLevel);
-    		
-    		}else if(playerLevel >= 10 && playerLevel < 20) {
-    			if(playerLevel % 10 == 0) {
-    				sendRankupNotificationToServer("APPRENTICE", p.getName(), ChatColor.WHITE);
-    			}
-    			sendRankupNotification(p, "APPRENTICE", ChatColor.WHITE, playerLevel);
-    		
-    		} else if(playerLevel >= 20 && playerLevel < 30) {
-    			if(playerLevel % 20 == 0) {
-    				sendRankupNotificationToServer("INITIATE", p.getName(), ChatColor.YELLOW);
-    			}
-    			sendRankupNotification(p, "INITIATE", ChatColor.YELLOW, playerLevel);
-    		
-    		} else if(playerLevel >= 30 && playerLevel < 40) {
-    			if(playerLevel % 30 == 0) {
-    				sendRankupNotificationToServer("ADEPT", p.getName(), ChatColor.GOLD);
-    			}
-    			sendRankupNotification(p, "ADEPT", ChatColor.GOLD, playerLevel);
-    		
-    		} else if(playerLevel >= 40 && playerLevel < 50) {
-    			if(playerLevel % 40 == 0) {
-    				sendRankupNotificationToServer("SKILLED", p.getName(), ChatColor.GREEN);
-    			}
-    			sendRankupNotification(p, "SKILLED", ChatColor.GREEN, playerLevel);
-    		
-    		} else if(playerLevel >= 50 && playerLevel < 60) {
-    			if(playerLevel % 50 == 0) {
-    				sendRankupNotificationToServer("VETERAN", p.getName(), ChatColor.DARK_BLUE);
-    			}
-    			sendRankupNotification(p, "VETERAN", ChatColor.DARK_BLUE, playerLevel);
-    		
-    		} else if(playerLevel >= 60 && playerLevel < 70) {
-    			if(playerLevel % 60 == 0) {
-    				sendRankupNotificationToServer("SPECIALIST", p.getName(), ChatColor.DARK_PURPLE);
-    			}
-    			sendRankupNotification(p, "SPECIALIST", ChatColor.DARK_PURPLE, playerLevel);
-    		
-    		} else if(playerLevel >= 70 && playerLevel < 80) {
-    			if(playerLevel % 70 == 0) {
-    				sendRankupNotificationToServer("EXPERT", p.getName(), ChatColor.LIGHT_PURPLE);
-    			}
-    			sendRankupNotification(p, "EXPERT", ChatColor.LIGHT_PURPLE, playerLevel);
-    		
-    		} else if(playerLevel >= 80 && playerLevel < 90) {
-    			if(playerLevel % 80 == 0) {
-    				sendRankupNotificationToServer("ELITE", p.getName(), ChatColor.AQUA);
-    			}
-    			sendRankupNotification(p, "ELITE", ChatColor.AQUA, playerLevel);
-    		
-    		} else if(playerLevel >= 90 && playerLevel < 100) {
-    			if(playerLevel % 90 == 0) {
-    				sendRankupNotificationToServer("MASTER", p.getName(), ChatColor.DARK_GREEN);
-    			}
-    			sendRankupNotification(p, "MASTER", ChatColor.DARK_GREEN, playerLevel);
-    		
-    		} else if(playerLevel >= 100) {
-    			if(playerLevel % 100 == 0) {
-    				sendRankupNotificationToServer("GRANDMASTER", p.getName(), ChatColor.DARK_AQUA);
-    			}
-    			sendRankupNotification(p, "GRANDMASTER", ChatColor.DARK_AQUA, playerLevel);
+    		if(p != null) {
+	    		if(playerLevel >= 1 && playerLevel < 10) {
+	    			sendRankupNotification(p, "NOVICE", ChatColor.GRAY, playerLevel);
+	    		
+	    		}else if(playerLevel >= 10 && playerLevel < 20) {
+	    			if(playerLevel % 10 == 0) {
+	    				sendRankupNotificationToServer("APPRENTICE", p.getName(), ChatColor.WHITE);
+	    			}
+	    			sendRankupNotification(p, "APPRENTICE", ChatColor.WHITE, playerLevel);
+	    		
+	    		} else if(playerLevel >= 20 && playerLevel < 30) {
+	    			if(playerLevel % 20 == 0) {
+	    				sendRankupNotificationToServer("INITIATE", p.getName(), ChatColor.YELLOW);
+	    			}
+	    			sendRankupNotification(p, "INITIATE", ChatColor.YELLOW, playerLevel);
+	    		
+	    		} else if(playerLevel >= 30 && playerLevel < 40) {
+	    			if(playerLevel % 30 == 0) {
+	    				sendRankupNotificationToServer("ADEPT", p.getName(), ChatColor.GOLD);
+	    			}
+	    			sendRankupNotification(p, "ADEPT", ChatColor.GOLD, playerLevel);
+	    		
+	    		} else if(playerLevel >= 40 && playerLevel < 50) {
+	    			if(playerLevel % 40 == 0) {
+	    				sendRankupNotificationToServer("SKILLED", p.getName(), ChatColor.GREEN);
+	    			}
+	    			sendRankupNotification(p, "SKILLED", ChatColor.GREEN, playerLevel);
+	    		
+	    		} else if(playerLevel >= 50 && playerLevel < 60) {
+	    			if(playerLevel % 50 == 0) {
+	    				sendRankupNotificationToServer("VETERAN", p.getName(), ChatColor.DARK_BLUE);
+	    			}
+	    			sendRankupNotification(p, "VETERAN", ChatColor.DARK_BLUE, playerLevel);
+	    		
+	    		} else if(playerLevel >= 60 && playerLevel < 70) {
+	    			if(playerLevel % 60 == 0) {
+	    				sendRankupNotificationToServer("SPECIALIST", p.getName(), ChatColor.DARK_PURPLE);
+	    			}
+	    			sendRankupNotification(p, "SPECIALIST", ChatColor.DARK_PURPLE, playerLevel);
+	    		
+	    		} else if(playerLevel >= 70 && playerLevel < 80) {
+	    			if(playerLevel % 70 == 0) {
+	    				sendRankupNotificationToServer("EXPERT", p.getName(), ChatColor.LIGHT_PURPLE);
+	    			}
+	    			sendRankupNotification(p, "EXPERT", ChatColor.LIGHT_PURPLE, playerLevel);
+	    		
+	    		} else if(playerLevel >= 80 && playerLevel < 90) {
+	    			if(playerLevel % 80 == 0) {
+	    				sendRankupNotificationToServer("ELITE", p.getName(), ChatColor.AQUA);
+	    			}
+	    			sendRankupNotification(p, "ELITE", ChatColor.AQUA, playerLevel);
+	    		
+	    		} else if(playerLevel >= 90 && playerLevel < 100) {
+	    			if(playerLevel % 90 == 0) {
+	    				sendRankupNotificationToServer("MASTER", p.getName(), ChatColor.DARK_GREEN);
+	    			}
+	    			sendRankupNotification(p, "MASTER", ChatColor.DARK_GREEN, playerLevel);
+	    		
+	    		} else if(playerLevel >= 100) {
+	    			if(playerLevel % 100 == 0) {
+	    				sendRankupNotificationToServer("GRANDMASTER", p.getName(), ChatColor.DARK_AQUA);
+	    			}
+	    			sendRankupNotification(p, "GRANDMASTER", ChatColor.DARK_AQUA, playerLevel);
+	    		}
     		}
     		
     		requiredXP = (int)(Math.pow(playerLevel/0.71, 2.2));
@@ -192,6 +194,7 @@ public class EditPlayerPoints implements Listener{
 		} else if(event.getClick() == ClickType.RIGHT) {
 			removePoints(eventSection.getInt(configKey), configKey, eventSection, p, XP, IGN);
 		}
+		mainClass.savePlayerDataFile();
     }
     
     @SuppressWarnings("deprecation")

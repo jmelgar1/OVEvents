@@ -8,14 +8,12 @@ import org.bukkit.entity.Player;
 import org.onlyvanilla.ovevents.runnables.send30SecondReminder;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
-import org.onlyvanilla.ovevents.runnables.startEventCountdown;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class oveEndVote implements CommandExecutor{
 	
 	SendDailyEventVote dailyVote = new SendDailyEventVote();
-	startEventCountdown eventCountdown = new startEventCountdown();
 	send30SecondReminder secondReminder = new send30SecondReminder();
 	sendVoteFinished voteFinished = new sendVoteFinished();
 	
@@ -33,9 +31,6 @@ public class oveEndVote implements CommandExecutor{
         			p.sendMessage(ChatColor.RED + "Event vote cancelled!");
         		} else if (Bukkit.getScheduler().isQueued(secondReminder.getTaskId()) == true){
         			secondReminder.cancel();
-        			p.sendMessage(ChatColor.RED + "Event vote cancelled!");
-        		} else if (Bukkit.getScheduler().isQueued(eventCountdown.getTaskId()) == true){
-        			eventCountdown.cancel();
         			p.sendMessage(ChatColor.RED + "Event vote cancelled!");
         		} else {
         			p.sendMessage(ChatColor.RED + "There is not event vote running right now.");

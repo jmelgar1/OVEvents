@@ -2,6 +2,8 @@
 #list of players who have already voted
 participants: []
 
+current-countdown: "empty"
+
 #has voting time passed?
 votetimepassed: false
 

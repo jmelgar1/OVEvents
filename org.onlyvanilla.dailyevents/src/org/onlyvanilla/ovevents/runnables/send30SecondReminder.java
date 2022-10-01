@@ -20,8 +20,5 @@ public class send30SecondReminder extends BukkitRunnable{
 			p.sendMessage(mainClass.prefix + "The event starts in 30 seconds!");
 			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1F, 0.5F);	
 		}	
-		
-		startEventCountdown eventCountdown = new startEventCountdown();
-		eventCountdown.runTaskLater(mainClass, 400);
 	}
 }

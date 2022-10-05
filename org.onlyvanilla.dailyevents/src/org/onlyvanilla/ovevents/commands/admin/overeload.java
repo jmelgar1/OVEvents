@@ -19,6 +19,8 @@ public class overeload implements CommandExecutor{
         if(cmd.getName().equalsIgnoreCase("overeload")) {
         	p.sendMessage(ChatColor.GREEN + "Reloaded DailyEvents Config");
         	mainClass.reloadPlayerDataFile();
+        	mainClass.reloadEventDataFile();
+        	mainClass.reloadConfig();
         }	
 		return true;
 	}

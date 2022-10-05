@@ -10,12 +10,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
+import org.onlyvanilla.ovevents.bukkitevents.MagicItemsCheck;
 import org.onlyvanilla.ovevents.bukkitevents.PreventItemUsage;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.commands.ovehelp;
 import org.onlyvanilla.ovevents.commands.ovevote;
-import org.onlyvanilla.ovevents.commands.ovlevels;
 import org.onlyvanilla.ovevents.commands.ovprofile;
+import org.onlyvanilla.ovevents.commands.ovshop;
 import org.onlyvanilla.ovevents.commands.admin.configureStats;
 import org.onlyvanilla.ovevents.commands.admin.configureStatsBC;
 import org.onlyvanilla.ovevents.commands.admin.configureStatsCT;
@@ -24,6 +25,7 @@ import org.onlyvanilla.ovevents.commands.admin.configureStatsRVB;
 import org.onlyvanilla.ovevents.commands.admin.oveEndVote;
 import org.onlyvanilla.ovevents.commands.admin.oveForceVote;
 import org.onlyvanilla.ovevents.commands.admin.oveGiveXP;
+import org.onlyvanilla.ovevents.commands.admin.oveSetXP;
 import org.onlyvanilla.ovevents.commands.admin.overeload;
 import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.runnables.CheckRestrictedItems;
@@ -32,6 +34,7 @@ import org.onlyvanilla.ovevents.runnables.CountdownTimerLong;
 import org.onlyvanilla.ovevents.runnables.EndEvent;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 import org.onlyvanilla.ovevents.runnables.sendVoteFinished;
+import org.onlyvanilla.ovevents.unused.ovlevelsUNUSED;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -99,8 +102,8 @@ public class Main extends JavaPlugin implements Listener{
 			//plugin commands
 			this.getCommand("ovprofile").setExecutor(new ovprofile());
 			this.getCommand("ovevote").setExecutor(new ovevote());
-			this.getCommand("ovlevels").setExecutor(new ovlevels());
 			this.getCommand("ovehelp").setExecutor(new ovehelp());
+			this.getCommand("ovshop").setExecutor(new ovshop());
 			
 			//admin commands
 			this.getCommand("configurestats").setExecutor(new configureStats());
@@ -112,10 +115,11 @@ public class Main extends JavaPlugin implements Listener{
 			this.getCommand("oveforcevote").setExecutor(new oveForceVote());
 			this.getCommand("oveendvote").setExecutor(new oveEndVote());
 			this.getCommand("ovegivexp").setExecutor(new oveGiveXP());
+			this.getCommand("ovesetxp").setExecutor(new oveSetXP());
 			
 			//register events
 			getServer().getPluginManager().registerEvents(new ovprofile(), this);
-			getServer().getPluginManager().registerEvents(new ovlevels(), this);
+			getServer().getPluginManager().registerEvents(new ovshop(), this);
 			
 			//admin events
 			getServer().getPluginManager().registerEvents(new playerEvents(), this);
@@ -127,6 +131,7 @@ public class Main extends JavaPlugin implements Listener{
 			getServer().getPluginManager().registerEvents(new EditPlayerPoints(), this);
 			getServer().getPluginManager().registerEvents(new ovevote(), this);
 			getServer().getPluginManager().registerEvents(new PreventItemUsage(), this);
+			getServer().getPluginManager().registerEvents(new MagicItemsCheck(), this);
 
 			//runnable events
 			getServer().getPluginManager().registerEvents(new sendVoteFinished(), this);
@@ -162,6 +167,7 @@ public class Main extends JavaPlugin implements Listener{
 		
 		public void reloadPlayerDataFile() {
 			playerData = YamlConfiguration.loadConfiguration(playerDataFile);
+			
 		}
 		
 		public FileConfiguration getPlayerData() {

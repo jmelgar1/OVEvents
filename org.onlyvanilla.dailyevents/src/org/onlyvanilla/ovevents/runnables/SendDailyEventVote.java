@@ -21,6 +21,8 @@ public class SendDailyEventVote extends BukkitRunnable{
 	@Override
 	public void run() {
 		
+		System.out.println("sent vote");
+		
 		if(Bukkit.getServer().getOnlinePlayers().size() >= 2) {
 			
 			//clear previous participation list
@@ -38,7 +40,7 @@ public class SendDailyEventVote extends BukkitRunnable{
 			
 			for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 				
-				p.getWorld().playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_1, 500F, 1.2F);
+				p.getWorld().playSound(p.getLocation(), Sound.ITEM_GOAT_HORN_SOUND_1, 0.5F, 1.2F);
 				
 				TextComponent message = new TextComponent("          ✦ Click Here To Vote! ✦");
 		    	message.setColor(ChatColor.RED);

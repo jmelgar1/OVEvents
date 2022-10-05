@@ -53,15 +53,18 @@ public class ovprofile extends InventoryManager implements Listener, CommandExec
 	//convert this to using a config instead (like ovevote)
 	static Material[] items = {Material.FISHING_ROD, Material.GHAST_TEAR, Material.SHULKER_SHELL, Material.DRAGON_HEAD, Material.COOKED_PORKCHOP,
 						Material.CARROT, Material.BLACK_DYE, Material.DIAMOND, Material.SCULK_SENSOR, Material.COOKIE,
-						Material.NETHERITE_INGOT, Material.POTATO, Material.IRON_SWORD, Material.COOKED_BEEF, Material.ROTTEN_FLESH};
+						Material.NETHERITE_INGOT, Material.POTATO, Material.IRON_SWORD, Material.COOKED_BEEF, Material.ROTTEN_FLESH,
+						Material.COAL, Material.IRON_INGOT, Material.OAK_LOG, Material.BREAD, Material.LIGHT_GRAY_DYE, Material.LIGHT_GRAY_DYE};
 	
 	static ChatColor[] colors = {ChatColor.LIGHT_PURPLE, ChatColor.WHITE, ChatColor.DARK_PURPLE, ChatColor.DARK_GRAY, ChatColor.LIGHT_PURPLE,
 								 ChatColor.GOLD, ChatColor.DARK_GRAY, ChatColor.AQUA, ChatColor.DARK_BLUE, ChatColor.YELLOW,
-								 ChatColor.GRAY, ChatColor.YELLOW, ChatColor.DARK_RED, ChatColor.WHITE, ChatColor.DARK_GREEN};
+								 ChatColor.GRAY, ChatColor.YELLOW, ChatColor.DARK_RED, ChatColor.WHITE, ChatColor.DARK_GREEN,
+								 ChatColor.DARK_GRAY, ChatColor.GRAY, ChatColor.GREEN, ChatColor.GOLD, ChatColor.GRAY, ChatColor.GRAY};
 	
 	public static String[] events = {"Fish Frenzy", "Ghast Hunter", "Shulker Hunt", "Dragon Slayer", "Bring Home The Bacon", "Crazy Carrots",
 							  "Bad Bats", "Deep Diamonds", "Warden Warrior", "Cookie Clicker", "Nasty Netherite",
-							  "Precious Potatoes", "Hilarious Homicide", "Cow Tipper", "World War Z"};
+							  "Precious Potatoes", "Hilarious Homicide", "Cow Tipper", "World War Z", "Coal Digger", "Iron Worker",
+							  "Lumberjack", "Best Baker", "TBD", "TBD"};
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -118,15 +121,13 @@ public class ovprofile extends InventoryManager implements Listener, CommandExec
 	
 	//add rank
 	double playerXP = playerUUIDSection.getDouble("levelExperience");
-	int playerLevel = playerUUIDSection.getInt("level");
 	inv.setItem(4, createGuiSkull(skull, ChatColor.GRAY + "" + ChatColor.BOLD + "USER: " + ChatColor.WHITE + IGN,
 			"",
 			ChatColor.GRAY + "" + ChatColor.BOLD + "Rank: " + ChatColor.WHITE + getPlayerGroup(IGN).toUpperCase(),
+			"",
 			ChatColor.GRAY + "" + ChatColor.BOLD + "Date Joined: " + ChatColor.WHITE + "Coming Soon",
 			"",
-			ChatColor.GRAY + "" + ChatColor.BOLD + "Level: " + ChatColor.GOLD + playerLevel,
-			ChatColor.GRAY + "" + ChatColor.BOLD + "Experience: " + ChatColor.YELLOW + (int)playerXP + 
-			ChatColor.GRAY + "/" + ChatColor.GOLD + (int)Math.pow(((playerLevel+1)/0.71), 2.2)));
+			ChatColor.GRAY + "" + ChatColor.BOLD + "OV-XP: " + ChatColor.YELLOW + (int)playerXP));
 	
 	//get champions tour section
 	ConfigurationSection championsTourSection = bigEventsSection.getConfigurationSection("champions-tour");
@@ -179,13 +180,15 @@ public class ovprofile extends InventoryManager implements Listener, CommandExec
 	//Small events section
 	ConfigurationSection smallEventsSection = statsSection.getConfigurationSection("small-events");
 	
-	int inventorySlot = 29;	
-	for(int i = 0; i < 15; i++) {
+	
+	//make it so these are in order from greatest to least
+	int inventorySlot = 28;	
+	for(int i = 0; i < 21; i++) {
 		inv.setItem(inventorySlot, createGuiItem(items[i], colors[i] + events[i], 
 				ChatColor.GRAY + "Wins: " + ChatColor.YELLOW + smallEventsSection.getInt(events[i])));
 		
-		if(i==4 || i==9) {
-			inventorySlot += 5;
+		if(i==6 || i==13) {
+			inventorySlot += 3;
 		} else {
 			inventorySlot++;
 			}

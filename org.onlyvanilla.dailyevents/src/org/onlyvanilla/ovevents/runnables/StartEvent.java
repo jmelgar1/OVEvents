@@ -9,10 +9,14 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.onlyvanilla.ovevents.Main;
 import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
+import org.onlyvanilla.ovevents.events.blockbreakevents.CoalDigger;
 import org.onlyvanilla.ovevents.events.blockbreakevents.CrazyCarrots;
 import org.onlyvanilla.ovevents.events.blockbreakevents.DeepDiamonds;
+import org.onlyvanilla.ovevents.events.blockbreakevents.Ironworker;
+import org.onlyvanilla.ovevents.events.blockbreakevents.Lumberjack;
 import org.onlyvanilla.ovevents.events.blockbreakevents.NastyNetherite;
 import org.onlyvanilla.ovevents.events.blockbreakevents.PreciousPotatoes;
+import org.onlyvanilla.ovevents.events.craftingevents.BestBaker;
 import org.onlyvanilla.ovevents.events.craftingevents.CookieClicker;
 import org.onlyvanilla.ovevents.events.damageevents.DragonSlayer;
 import org.onlyvanilla.ovevents.events.fishingevents.FishFrenzy;
@@ -27,6 +31,10 @@ import org.onlyvanilla.ovevents.events.killingevents.WorldWarZ;
 import org.onlyvanilla.ovevents.managers.DetermineEventData;
 import org.onlyvanilla.ovevents.smalleventmanager.DailyEvents;
 
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.types.InheritanceNode;
 import net.md_5.bungee.api.ChatColor;
 
 public class StartEvent extends BukkitRunnable{
@@ -54,6 +62,9 @@ public class StartEvent extends BukkitRunnable{
 	long tenMinutes = 12000;
 	long twentyMinutes = 24000;
 	long thirtyMinutes = 36000;
+	
+	//Luckperms api
+	static LuckPerms api = LuckPermsProvider.get();
 	
 	@Override
 	public void run() { 
@@ -283,6 +294,62 @@ public class StartEvent extends BukkitRunnable{
 			
 			//end event after 20 minutes
 			endEvent.runTaskLater(mainClass, tenMinutes);
+		} else if (winningEventNS.equals("CoalDigger")){
+			CoalDigger coalDigger = new CoalDigger();
+			
+			eventWinnerClass = coalDigger;
+			
+			scoreboardTitle = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "COAL DIGGER";
+			createScoreboard(coalDigger);
+			
+			if(allOnline == true) {
+				coalDigger.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, tenMinutes);
+		} else if (winningEventNS.equals("BestBaker")){
+			BestBaker bestBaker = new BestBaker();
+			
+			eventWinnerClass = bestBaker;
+			
+			scoreboardTitle = ChatColor.GOLD + "" + ChatColor.BOLD + "BEST BAKER";
+			createScoreboard(bestBaker);
+			
+			if(allOnline == true) {
+				bestBaker.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, tenMinutes);
+		} else if (winningEventNS.equals("Lumberjack")){
+			Lumberjack lumberjack = new Lumberjack();
+			
+			eventWinnerClass = lumberjack;
+			
+			scoreboardTitle = ChatColor.BLUE + "" + ChatColor.BOLD + "LUMBERJACK";
+			createScoreboard(lumberjack);
+			
+			if(allOnline == true) {
+				lumberjack.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, tenMinutes);
+		} else if (winningEventNS.equals("Ironworker")){
+			Ironworker ironworker = new Ironworker();
+			
+			eventWinnerClass = ironworker;
+			
+			scoreboardTitle = ChatColor.GRAY + "" + ChatColor.BOLD + "IRONWORKER";
+			createScoreboard(ironworker);
+			
+			if(allOnline == true) {
+				ironworker.registerEvents();
+			}
+			
+			//end event after 20 minutes
+			endEvent.runTaskLater(mainClass, twentyMinutes);
 		}
 		
 		if(allOnline == false) {
@@ -321,23 +388,33 @@ public class StartEvent extends BukkitRunnable{
 		for(String s : mainClass.getEventData().getStringList("participants")){
 			Player p = Bukkit.getPlayer(s);
 			
+//			String group = "in_event";
+//			User user = api.getPlayerAdapter(Player.class).getUser(p);
+//			user.data().add(InheritanceNode.builder(group).value(true).build());
+//			api.getUserManager().saveUser(user);
+			
 			//if player leaves before event starts REMOVE FROM LIST!
 			if(p == null) {
-				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + s + " left the game before the event started and therefore the event will be cancelled!");
 				
-				String playerUUIDString = p.getUniqueId().toString();
+				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + s + " left the game before the event started and will be removed from the event!");
 				
-				ConfigurationSection playerDataConfig = mainClass.getPlayerData();
-				ConfigurationSection playerUUID = playerDataConfig.getConfigurationSection(playerUUIDString);
+				mainClass.getEventData().set("participants", mainClass.getEventData().getStringList("participants").remove(s));
 				
-				//remove 15 XP
-				editPlayerPoints.removeLevelXP(15, playerUUID);
+				mainClass.saveEventDataFile();
 				
-				//cancel runnable if player is found not to be online
-				instance.cancel();
-				
-				//set boolean to false
-				allOnline = false;
+				if(mainClass.getEventData().getStringList("participants").size() < 2) {
+					Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + "The event will be cancelled since there are less than two players in the event.");
+					
+					//cancel runnable if player is found not to be online
+					instance.cancel();
+					
+					//set boolean to false
+					allOnline = false;
+					
+					SendDailyEventVote sendVote = new SendDailyEventVote();
+					sendVote.runTaskLater(mainClass, 3000);
+					this.cancel();
+				}
 			} else {
 				obj.getScore(p.getName() + ": " + ChatColor.YELLOW + className.winningEventSection.getInt(p.getName())).setScore(counter);
 				counter--;

@@ -6,9 +6,9 @@ Fish Frenzy:
    color: LIGHT_PURPLE
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Ghast Hunter:
    description: Kill as many ghasts as you can!
    item: GHAST_TEAR
@@ -17,9 +17,9 @@ Ghast Hunter:
    color: WHITE
    votes: 0
    placements:
-      first: 40
-      second: 20
-      third: 10
+      first: 200
+      second: 100
+      third: 50
 Shulker Hunt:
    description: Kill as many shulkers as you can!
    item: SHULKER_SHELL
@@ -28,9 +28,9 @@ Shulker Hunt:
    color: DARK_PURPLE
    votes: 0
    placements:
-      first: 60
-      second: 30
-      third: 15
+      first: 300
+      second: 200
+      third: 100
 Dragon Slayer:
    description: Do as much damage to enderdragons as you can!
    item: DRAGON_HEAD
@@ -39,9 +39,9 @@ Dragon Slayer:
    color: DARK_GRAY
    votes: 0
    placements:
-      first: 60
-      second: 30
-      third: 15
+      first: 300
+      second: 200
+      third: 100
 Bring Home The Bacon:
    description: Kill as many pigs as you can!
    item: COOKED_PORKCHOP
@@ -50,9 +50,9 @@ Bring Home The Bacon:
    color: LIGHT_PURPLE
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Crazy Carrots:
    description: Mine as many fully grown carrot crops as you can!
    item: CARROT
@@ -61,9 +61,9 @@ Crazy Carrots:
    color: GOLD
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Bad Bats:
    description: Kill as many bats as you can!
    item: BLACK_DYE
@@ -72,9 +72,9 @@ Bad Bats:
    color: DARK_GRAY
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Deep Diamonds:
    description: Mine as many diamonds as you can!
    item: DIAMOND
@@ -83,9 +83,9 @@ Deep Diamonds:
    color: AQUA
    votes: 0
    placements:
-      first: 60
-      second: 30
-      third: 15
+      first: 300
+      second: 200
+      third: 100
 Warden Warrior:
    description: Kill as many wardens as you can!
    item: SCULK_SENSOR
@@ -94,9 +94,9 @@ Warden Warrior:
    color: DARK_BLUE
    votes: 0
    placements:
-      first: 60
-      second: 30
-      third: 15
+      first: 300
+      second: 200
+      third: 100
 Cookie Clicker:
    description: Craft as many cookies as you can!
    item: COOKIE
@@ -105,9 +105,9 @@ Cookie Clicker:
    color: YELLOW
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Nasty Netherite:
    description: Mine as much ancient debri as you can!
    item: NETHERITE_INGOT
@@ -116,9 +116,9 @@ Nasty Netherite:
    color: GRAY
    votes: 0
    placements:
-      first: 60
-      second: 30
-      third: 15
+      first: 300
+      second: 200
+      third: 100
 Precious Potatoes:
    description: Mine as many fully grown potatoes as you can!
    item: POTATO
@@ -127,9 +127,9 @@ Precious Potatoes:
    color: YELLOW
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 Hilarious Homicide:
    description: Kill as many villagers as you can!
    item: IRON_SWORD
@@ -138,9 +138,9 @@ Hilarious Homicide:
    color: DARK_RED
    votes: 0
    placements:
-      first: 40
-      second: 20
-      third: 10
+      first: 200
+      second: 100
+      third: 50
 Cow Tipper:
    description: Kill as many cows as you can!
    item: COOKED_BEEF
@@ -149,9 +149,9 @@ Cow Tipper:
    color: WHITE
    votes: 0
    placements:
-      first: 20
-      second: 10
-      third: 5
+      first: 100
+      second: 75
+      third: 35
 World War Z:
    description: Kill as many zombies as you can!
    item: ROTTEN_FLESH
@@ -160,6 +160,50 @@ World War Z:
    color: DARK_GREEN
    votes: 0
    placements:
-      first: 40
-      second: 20
-      third: 10
+      first: 200
+      second: 100
+      third: 50
+Coal Digger:
+   description: Mine as much coal ore as you can!
+   item: COAL
+   name: Coal Digger
+   duration: 10
+   color: DARK_GRAY
+   votes: 0
+   placements:
+      first: 100
+      second: 75
+      third: 35      
+Iron Worker:
+   description: Mine as much iron ore as you can!
+   item: IRON_INGOT
+   name: Iron Worker
+   duration: 20
+   color: GRAY
+   votes: 0
+   placements:
+      first: 200
+      second: 100
+      third: 50
+Lumberjack:
+   description: Mine as many logs as you can!
+   item: OAK_LOG
+   name: Lumberjack
+   duration: 10
+   color: GREEN
+   votes: 0
+   placements:
+      first: 100
+      second: 75
+      third: 35
+Best Baker:
+   description: Craft as much bread as you can!
+   item: BREAD
+   name: Best Baker
+   duration: 10
+   color: GOLD
+   votes: 0
+   placements:
+      first: 100
+      second: 75
+      third: 35

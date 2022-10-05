@@ -13,7 +13,7 @@ import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
 import org.onlyvanilla.ovevents.runnables.SendDailyEventVote;
 
-public class oveGiveXP implements CommandExecutor{
+public class oveSetXP implements CommandExecutor{
 	
 	//Main instance
 	private Main mainClass = Main.getInstance();
@@ -29,8 +29,8 @@ public class oveGiveXP implements CommandExecutor{
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("ovegivexp")) {
-        	if(sender.hasPermission("ove.givexp")) {	
+        if(cmd.getName().equalsIgnoreCase("ovesetxp")) {
+        	if(sender.hasPermission("ove.setxp")) {	
         		if(!args[0].isEmpty() && !args[1].isEmpty()) {
         			String playerName = args[0];
         			String XP = args[1];
@@ -47,10 +47,10 @@ public class oveGiveXP implements CommandExecutor{
         				playerUUID = playerDataConfig.getConfigurationSection(playerUUIDString);
         			}
         	    	
-        	    	epp1.addLevelXP(Double.parseDouble(XP), playerUUID);
+        	    	epp1.setLevelXP(Double.parseDouble(XP), playerUUID);
         	    	
         	    	if(sender instanceof Player) {
-        	    		sender.sendMessage(mainClass.prefix + "Added " + XP + " to " + playerName);
+        	    		sender.sendMessage(mainClass.prefix + "Set " + XP + " to " + playerName);
         	    	}
         		}
         	}

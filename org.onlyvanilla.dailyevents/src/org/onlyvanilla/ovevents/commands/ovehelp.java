@@ -15,9 +15,9 @@ public class ovehelp implements CommandExecutor {
             Player p = (Player) sender;
             	if(cmd.getName().equalsIgnoreCase(cmd1)) {
             		p.sendMessage(ChatColor.GRAY + "------" + ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD + "OVEvents" + ChatColor.GRAY + "------");
-            		p.sendMessage(ChatColor.DARK_PURPLE + "/ovehelp (This page)");
+            		p.sendMessage(ChatColor.YELLOW + "/ovehelp (This page)");
             		p.sendMessage(ChatColor.YELLOW + "/ovprofile [username] (View OnlyVanilla profiles)");
-            		p.sendMessage(ChatColor.YELLOW + "/ovlevels (See leveling rewards)");
+            		p.sendMessage(ChatColor.YELLOW + "/ovshop (See OV-XP rewards)");
             }
         }
         return true;

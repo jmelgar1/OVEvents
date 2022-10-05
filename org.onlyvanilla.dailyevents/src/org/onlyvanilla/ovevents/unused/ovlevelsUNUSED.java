@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.commands;
+package org.onlyvanilla.ovevents.unused;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.onlyvanilla.ovevents.managers.InventoryManager;
 
-public class ovlevels extends InventoryManager implements Listener, CommandExecutor{
+public class ovlevelsUNUSED extends InventoryManager implements Listener, CommandExecutor{
 	
 	private static Inventory inv1;
 	
@@ -32,6 +32,7 @@ public class ovlevels extends InventoryManager implements Listener, CommandExecu
 
 		Player p = (Player) sender;
         	if(cmd.getName().equalsIgnoreCase("ovlevels")) { 
+        		p.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "These rewards will be completely reworked. Ignore these items.");
         		UUID playerUUID = p.getUniqueId();
         		inv1 = Bukkit.createInventory(p, 54, "OnlyVanilla Levels (Page 1/6)");
         		inventories.put(playerUUID, inv1);

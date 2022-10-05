@@ -138,13 +138,13 @@ public class configureStatsMA implements CommandExecutor, Listener{
 		ConfigurationSection mapArtContest = epp1.getBigEventSection(IGN, "map-art-contests");
 		
 		if(clickedItem.getType() == Material.GOLD_BLOCK) {
-			epp1.checkClickType(event, mapArtContest, "1st", p, 1000, IGN);
+			epp1.checkClickType(event, mapArtContest, "1st", p, 10000, IGN);
 		} else if(clickedItem.getType() == Material.IRON_BLOCK) {
-			epp1.checkClickType(event, mapArtContest, "2nd", p, 500, IGN);
+			epp1.checkClickType(event, mapArtContest, "2nd", p, 5000, IGN);
 		} else if(clickedItem.getType() == Material.COPPER_BLOCK) {
-			epp1.checkClickType(event, mapArtContest, "3rd", p, 300, IGN);
+			epp1.checkClickType(event, mapArtContest, "3rd", p, 3000, IGN);
 		} else if(clickedItem.getType() == Material.GOLD_INGOT) {
-			epp1.checkClickType(event, mapArtContest, "Participations", p, 100, IGN);
+			epp1.checkClickType(event, mapArtContest, "Participations", p, 1000, IGN);
 		} else if(clickedItem.getType() == Material.PLAYER_HEAD) {
 			p.performCommand("configurestats " + IGN);
 		}

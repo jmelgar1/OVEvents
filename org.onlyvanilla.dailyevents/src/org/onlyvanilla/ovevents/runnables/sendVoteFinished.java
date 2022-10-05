@@ -45,6 +45,10 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 			
 			if(!winningEvent.equals("NONE")) {
 				
+				
+				StartEventCountdown3Min threeMin = new StartEventCountdown3Min();
+				threeMin.runTaskTimer(mainClass, 0, 20);
+				
 				for(Player p : dev1.getNonParticipatingPlayers(mainClass.getEventData().getStringList("participants"))) {
 					p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
 					p.sendMessage(mainClass.prefix + ChatColor.RED + "You did not vote for an event "
@@ -52,29 +56,24 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 				}
 				
 				//send to players who joined
-				for(Player p : dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants"))) {		
-					p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
-					p.sendMessage(mainClass.prefix + ChatColor.GREEN + "The voting time has expired and "
-							+ "the event will start in 3 minutes!");
-					
-					StartEventCountdown3Min threeMin = new StartEventCountdown3Min();
-					threeMin.runTaskTimer(mainClass, 0, 20);
-					
-					threeMin.addPlayer(p);
-					
-					//add participants to config file to track scores
-					winningEventSection.createSection(p.getName());
-					winningEventSection.set(p.getName(), 0);
+				for(Player p : dev1.getPlayerParticipants(mainClass.getEventData().getStringList("participants"))) {
+					if(p != null) {
+						p.getWorld().playSound(p.getLocation(), Sound.ENTITY_FROG_TONGUE, 500F, 0.8F);	
+						p.sendMessage(mainClass.prefix + ChatColor.GREEN + "The voting time has expired and "
+								+ "the event will start in 3 minutes!");
+						
+						threeMin.addPlayer(p);
+						
+						//add participants to config file to track scores
+						winningEventSection.createSection(p.getName());
+						winningEventSection.set(p.getName(), 0);
+					}
 				}
 				
 				for(Player p : Bukkit.getServer().getOnlinePlayers()) {
 					p.sendMessage(mainClass.prefix + " "
 								+ ChatColor.LIGHT_PURPLE + winningEvent
 								+ " has won the vote!");
-					
-					p.sendMessage("");
-					p.sendMessage(ChatColor.RED + "NOTICE: Leaving before the event starts will result in a deduction of 15 XP!");
-					p.sendMessage("");
 				}
 				
 				//save files
@@ -86,7 +85,6 @@ public class sendVoteFinished extends BukkitRunnable implements Listener{
 				secondReminder.runTaskLater(mainClass, 3000);
 				
 			} else {
-				
 				//if no one voted. try again in 20 minutes
 				Bukkit.broadcastMessage(mainClass.prefix + ChatColor.RED + "Not enough players voted for an event! Trying again in 10 minutes!");
 				SendDailyEventVote sendDailyEventVote = new SendDailyEventVote();

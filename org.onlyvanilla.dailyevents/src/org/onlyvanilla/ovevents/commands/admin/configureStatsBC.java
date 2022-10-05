@@ -138,13 +138,13 @@ public class configureStatsBC implements CommandExecutor, Listener{
 		ConfigurationSection buildCompetition = epp1.getBigEventSection(IGN, "build-competitions");
 		
 		if(clickedItem.getType() == Material.GOLD_BLOCK) {
-			epp1.checkClickType(event, buildCompetition, "1st", p, 1000, IGN);
+			epp1.checkClickType(event, buildCompetition, "1st", p, 10000, IGN);
 		} else if(clickedItem.getType() == Material.IRON_BLOCK) {
-			epp1.checkClickType(event, buildCompetition, "2nd", p, 500, IGN);
+			epp1.checkClickType(event, buildCompetition, "2nd", p, 5000, IGN);
 		} else if(clickedItem.getType() == Material.COPPER_BLOCK) {
-			epp1.checkClickType(event, buildCompetition, "3rd", p, 250, IGN);
+			epp1.checkClickType(event, buildCompetition, "3rd", p, 2500, IGN);
 		} else if(clickedItem.getType() == Material.GOLD_INGOT) {
-			epp1.checkClickType(event, buildCompetition, "Participations", p, 100, IGN);
+			epp1.checkClickType(event, buildCompetition, "Participations", p, 1000, IGN);
 		} else if(clickedItem.getType() == Material.PLAYER_HEAD) {
 			p.performCommand("configurestats " + IGN);
 		}

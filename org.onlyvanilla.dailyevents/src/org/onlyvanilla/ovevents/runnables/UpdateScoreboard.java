@@ -45,9 +45,7 @@ public class UpdateScoreboard extends BukkitRunnable {
 		
 		for(String s : mainClass.getEventData().getStringList("participants")){
 			Player p = Bukkit.getPlayer(s);
-		if(p == null) {
-			this.cancel();
-		} else {
+		if(p != null) {
 			Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 			Objective obj = board.registerNewObjective("OVEvents", "dummy", startEvent.scoreboardTitle);
 			
@@ -76,7 +74,7 @@ public class UpdateScoreboard extends BukkitRunnable {
 					obj.getScore(ChatColor.AQUA + "play.onlyvanilla.org").setScore(1);
 				}
 			}	
-			p.setScoreboard(board);
+				p.setScoreboard(board);
 			}
 		}
 	}

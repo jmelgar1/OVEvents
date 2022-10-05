@@ -1,6 +1,6 @@
 api-version: 1.16
 name: OVEvents
-version: 1.0
+version: 1.1
 author: OnlyVanilla
 website: www.onlyvanilla.org
 main: org.onlyvanilla.ovevents.Main
@@ -15,9 +15,6 @@ commands:
     ovevote:
         description: Get daily event vote
         usage: /ovevote
-    ovlevels:
-        description: See the leveling titles
-        usage: /ovlevels
     configurestats:
         description: Set stats of players
         usage: /configurestats [user]
@@ -54,5 +51,12 @@ commands:
         description: Give player XP
         usage: /ovegivexp
         permission: ove.givexp
+    ovesetxp:
+        description: Set player XP
+        usage: /ovesetxp
+        permission: ove.setxp
+    ovshop:
+        description: Open shop
+        usage: /ovshop
         
         

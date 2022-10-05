@@ -146,17 +146,17 @@ public class configureStatsRVB implements CommandExecutor, Listener{
 		ConfigurationSection RVBEvent = epp1.getBigEventSection(IGN, "red-vs-blue");
 		
 		if(clickedItem.getType() == Material.GOLD_BLOCK) {
-			epp1.checkClickType(event, RVBEvent, "1st", p, 2000, IGN);
+			epp1.checkClickType(event, RVBEvent, "1st", p, 20000, IGN);
 		} else if(clickedItem.getType() == Material.IRON_BLOCK) {
-			epp1.checkClickType(event, RVBEvent, "2nd", p, 1000, IGN);
+			epp1.checkClickType(event, RVBEvent, "2nd", p, 10000, IGN);
 		} else if(clickedItem.getType() == Material.COPPER_BLOCK) {
-			epp1.checkClickType(event, RVBEvent, "3rd", p, 500, IGN);
+			epp1.checkClickType(event, RVBEvent, "3rd", p, 5000, IGN);
 		} else if(clickedItem.getType() == Material.NETHER_STAR) {
-			epp1.checkClickType(event, RVBEvent, "mvp", p, 600, IGN);
+			epp1.checkClickType(event, RVBEvent, "mvp", p, 7500, IGN);
 		} else if(clickedItem.getType() == Material.SPAWNER) {
-			epp1.checkClickType(event, RVBEvent, "Team Wins", p, 300, IGN);
+			epp1.checkClickType(event, RVBEvent, "Team Wins", p, 3000, IGN);
 		} else if(clickedItem.getType() == Material.GOLD_INGOT) {
-			epp1.checkClickType(event, RVBEvent, "Participations", p, 100, IGN);
+			epp1.checkClickType(event, RVBEvent, "Participations", p, 1000, IGN);
 		} else if(clickedItem.getType() == Material.PLAYER_HEAD) {
 			p.performCommand("configurestats " + IGN);
 		}

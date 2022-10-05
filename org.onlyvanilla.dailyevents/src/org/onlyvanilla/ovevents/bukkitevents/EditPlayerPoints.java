@@ -3,6 +3,7 @@ package org.onlyvanilla.ovevents.bukkitevents;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,6 +14,11 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.onlyvanilla.ovevents.Main;
 
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.data.DataMutateResult;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.node.types.InheritanceNode;
 import net.md_5.bungee.api.ChatColor;
 
 public class EditPlayerPoints implements Listener{
@@ -23,6 +29,10 @@ public class EditPlayerPoints implements Listener{
 	//Get playerdataconfig
 	FileConfiguration playerDataConfig = mainClass.getPlayerData();
 	
+	//Luckperms api
+	static LuckPerms api = LuckPermsProvider.get();
+	
+	//add points to users profiles
     @SuppressWarnings("deprecation")
 	public void addPoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
 		//get firstplace count
@@ -43,6 +53,7 @@ public class EditPlayerPoints implements Listener{
 		mainClass.savePlayerDataFile();
     }
     
+    //remove points from users profiles
     @SuppressWarnings("deprecation")
 	public void removePoints(int standingCount,  String standingKey, ConfigurationSection eventSection, Player p, double XP, String IGN) {
 		//get firstplace count
@@ -63,129 +74,47 @@ public class EditPlayerPoints implements Listener{
 		mainClass.savePlayerDataFile(); 
     }
     
+    //add XP to user
     public void addLevelXP(double XP, ConfigurationSection playerUUIDSection) {
    	
     	double currentXP = playerUUIDSection.getDouble("levelExperience");
-    	int playerLevel = playerUUIDSection.getInt("level");
-    	String playerName = playerUUIDSection.getString("player-name");
-    	Player p = Bukkit.getServer().getPlayer(playerName);
-    	
     	currentXP += XP;
-    	
-    	int requiredXP = (int)(Math.pow((playerLevel+1)/0.71, 2.2));
-    	
-    	while(currentXP >= requiredXP) {
-    		playerLevel += 1;
-    		currentXP -= requiredXP;
-    		
-    		if(p != null) {
-	    		if(playerLevel >= 1 && playerLevel < 10) {
-	    			sendRankupNotification(p, "NOVICE", ChatColor.GRAY, playerLevel);
-	    		
-	    		}else if(playerLevel >= 10 && playerLevel < 20) {
-	    			if(playerLevel % 10 == 0) {
-	    				sendRankupNotificationToServer("APPRENTICE", p.getName(), ChatColor.WHITE);
-	    			}
-	    			sendRankupNotification(p, "APPRENTICE", ChatColor.WHITE, playerLevel);
-	    		
-	    		} else if(playerLevel >= 20 && playerLevel < 30) {
-	    			if(playerLevel % 20 == 0) {
-	    				sendRankupNotificationToServer("INITIATE", p.getName(), ChatColor.YELLOW);
-	    			}
-	    			sendRankupNotification(p, "INITIATE", ChatColor.YELLOW, playerLevel);
-	    		
-	    		} else if(playerLevel >= 30 && playerLevel < 40) {
-	    			if(playerLevel % 30 == 0) {
-	    				sendRankupNotificationToServer("ADEPT", p.getName(), ChatColor.GOLD);
-	    			}
-	    			sendRankupNotification(p, "ADEPT", ChatColor.GOLD, playerLevel);
-	    		
-	    		} else if(playerLevel >= 40 && playerLevel < 50) {
-	    			if(playerLevel % 40 == 0) {
-	    				sendRankupNotificationToServer("SKILLED", p.getName(), ChatColor.GREEN);
-	    			}
-	    			sendRankupNotification(p, "SKILLED", ChatColor.GREEN, playerLevel);
-	    		
-	    		} else if(playerLevel >= 50 && playerLevel < 60) {
-	    			if(playerLevel % 50 == 0) {
-	    				sendRankupNotificationToServer("VETERAN", p.getName(), ChatColor.DARK_BLUE);
-	    			}
-	    			sendRankupNotification(p, "VETERAN", ChatColor.DARK_BLUE, playerLevel);
-	    		
-	    		} else if(playerLevel >= 60 && playerLevel < 70) {
-	    			if(playerLevel % 60 == 0) {
-	    				sendRankupNotificationToServer("SPECIALIST", p.getName(), ChatColor.DARK_PURPLE);
-	    			}
-	    			sendRankupNotification(p, "SPECIALIST", ChatColor.DARK_PURPLE, playerLevel);
-	    		
-	    		} else if(playerLevel >= 70 && playerLevel < 80) {
-	    			if(playerLevel % 70 == 0) {
-	    				sendRankupNotificationToServer("EXPERT", p.getName(), ChatColor.LIGHT_PURPLE);
-	    			}
-	    			sendRankupNotification(p, "EXPERT", ChatColor.LIGHT_PURPLE, playerLevel);
-	    		
-	    		} else if(playerLevel >= 80 && playerLevel < 90) {
-	    			if(playerLevel % 80 == 0) {
-	    				sendRankupNotificationToServer("ELITE", p.getName(), ChatColor.AQUA);
-	    			}
-	    			sendRankupNotification(p, "ELITE", ChatColor.AQUA, playerLevel);
-	    		
-	    		} else if(playerLevel >= 90 && playerLevel < 100) {
-	    			if(playerLevel % 90 == 0) {
-	    				sendRankupNotificationToServer("MASTER", p.getName(), ChatColor.DARK_GREEN);
-	    			}
-	    			sendRankupNotification(p, "MASTER", ChatColor.DARK_GREEN, playerLevel);
-	    		
-	    		} else if(playerLevel >= 100) {
-	    			if(playerLevel % 100 == 0) {
-	    				sendRankupNotificationToServer("GRANDMASTER", p.getName(), ChatColor.DARK_AQUA);
-	    			}
-	    			sendRankupNotification(p, "GRANDMASTER", ChatColor.DARK_AQUA, playerLevel);
-	    		}
-    		}
-    		
-    		requiredXP = (int)(Math.pow(playerLevel/0.71, 2.2));
-    	}
-    	
-    	playerUUIDSection.set("level", playerLevel);
     	playerUUIDSection.set("levelExperience", currentXP);
+    	mainClass.savePlayerDataFile();
     }
     
-    void sendRankupNotification(Player p, String rank, ChatColor color, int playerLevel) {
-    	p.sendTitle(ChatColor.GOLD + "" + ChatColor.BOLD + "RANKUP", color + "Level " + playerLevel + " " + rank, 35, 60, 35);
-		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1F, 1F);
-    }
-    
-    void sendRankupNotificationToServer(String rank, String playerName, ChatColor color) {
-		for(Player p : Bukkit.getServer().getOnlinePlayers()) {
-			p.sendMessage("");
-			p.sendMessage(ChatColor.LIGHT_PURPLE + playerName + " has ranked up to " + color + "" + ChatColor.BOLD + rank);
-			p.sendMessage("");
-			p.getWorld().playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1F, 1F);
-		}
-    }
     
     public void removeLevelXP(double XP, ConfigurationSection playerUUIDSection) {
        	
     	double currentXP = playerUUIDSection.getDouble("levelExperience");
-    	int playerLevel = playerUUIDSection.getInt("level");
-    	
     	currentXP -= XP;
-    	
-    	double requiredXP = (Math.pow((playerLevel-1)/0.71, 2.2));
-    	
-    	while(currentXP < requiredXP) {
-    		if(playerLevel == 1) {
-    			break;
-    		} else {
-    			playerLevel -= 1;
-        		requiredXP = (Math.pow((playerLevel-1)/0.71, 2.2));
-    		}
-    	}
-    	
-    	playerUUIDSection.set("level", playerLevel);
     	playerUUIDSection.set("levelExperience", currentXP);
+    	mainClass.savePlayerDataFile();
     }
+    
+    //set user XP
+    public void setLevelXP(double XP, ConfigurationSection playerUUIDSection) {
+    	playerUUIDSection.set("levelExperience", XP);
+    	mainClass.savePlayerDataFile();
+    }
+    
+    //set user XP
+    public int getPlayerXP(ConfigurationSection playerUUIDSection) {
+    	double currentXP = playerUUIDSection.getDouble("levelExperience");
+    	return (int)currentXP;
+    }
+    
+    //add user to in_event group
+    void addUserToGroup(String group, Player p) {
+		User user = api.getPlayerAdapter(Player.class).getUser(p);
+		user.data().add(InheritanceNode.builder(group).value(true).build());
+		api.getUserManager().saveUser(user);
+    }
+    
+//    void sendXPGainNotification(Player p, String rank, ChatColor color, int playerLevel) {
+//    	p.sendTitle(ChatColor.GOLD + "" + ChatColor.BOLD + "RANKUP", color + "Level " + playerLevel + " " + rank, 35, 60, 35);
+//		p.getWorld().playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1F, 1F);
+//    }
     
     @EventHandler
     public void checkClickType(final InventoryClickEvent event, ConfigurationSection eventSection, String configKey, Player p, double XP, String IGN) {

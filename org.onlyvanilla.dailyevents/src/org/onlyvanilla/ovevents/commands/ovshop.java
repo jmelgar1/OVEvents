@@ -61,7 +61,7 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 					ChatColor.GRAY + "Set one personal warp!",
 					"",
 					ChatColor.DARK_GRAY + "LEFT CLICK - Buy Item",
-					ChatColor.DARK_GRAY + "RIGHT CLICK - Buy Additional Warp"));;
+					ChatColor.DARK_GRAY + "RIGHT CLICK - Buy Additional Warp"));
 			
 			
 			inv1.setItem(12, createGuiItem(Material.FEATHER, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Player Teleportation Device",
@@ -123,12 +123,16 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 					//create item
 					ItemStack personalWarpDevice = createGuiItem(Material.BRICK, ChatColor.RED + "Personal Warping Device",
 							ChatColor.GRAY + "Owner: " + ChatColor.YELLOW + p.getName(),
-							ChatColor.GRAY + "Homes: " + ChatColor.YELLOW + 0,
 							"",
 							ChatColor.DARK_GRAY + "LEFT CLICK - Go to warp",
 							ChatColor.DARK_GRAY + "RIGHT CLICK - Set warp");
 					
 					onPurchase(p, personalWarpDevice, "Personal Warping Device", "20,000", 20000, playerUUIDSection);
+					
+					if(playerUUIDSection.getInt("warpsAllowed") == 0) {
+						playerUUIDSection.set("warpsAllowed", 1);
+						mainClass.savePlayerDataFile();
+					}
 					
 				} else if(event.getClick() == ClickType.RIGHT) {
 					p.sendMessage(ChatColor.GREEN + "Right Click");

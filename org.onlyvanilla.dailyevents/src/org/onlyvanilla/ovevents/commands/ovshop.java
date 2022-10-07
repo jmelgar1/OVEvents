@@ -54,9 +54,9 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 	public static void initializeItems() {
 
 			inv1.setItem(10, createGuiItem(Material.BRICK, ChatColor.DARK_RED + "" + ChatColor.BOLD + "Personal Warping Device",
-					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "20,000 OV-XP",
-					ChatColor.GRAY + "Additional Warp: " + ChatColor.GOLD + "10,000 OV-XP",
-					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "2,000 OV-XP",
+					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "10,000 OV-XP",
+					ChatColor.GRAY + "Additional Warp: " + ChatColor.GOLD + "5,000 OV-XP",
+					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "500 OV-XP",
 					"",
 					ChatColor.GRAY + "Set one personal warp!",
 					"",
@@ -65,24 +65,24 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 			
 			
 			inv1.setItem(12, createGuiItem(Material.FEATHER, ChatColor.DARK_BLUE + "" + ChatColor.BOLD + "Player Teleportation Device",
-					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "20,000 OV-XP",
-					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "2,000 OV-XP",
+					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "10,000 OV-XP",
+					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "500 OV-XP",
 					"",
 					ChatColor.GRAY + "Teleport to a player or teleport a player to you!",
 					"",
 					ChatColor.DARK_GRAY + "LEFT CLICK - Buy Item"));
 			
 			inv1.setItem(14, createGuiItem(Material.RABBIT_FOOT, ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Spawn Warping Device",
-					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "20,000 OV-XP",
-					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "2,000 OV-XP",
+					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "5,000 OV-XP",
+					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "250 OV-XP",
 					"",
 					ChatColor.GRAY + "Teleport to spawn!",
 					"",
 					ChatColor.DARK_GRAY + "LEFT CLICK - Buy Item"));
 			
 			inv1.setItem(16, createGuiItem(Material.ECHO_SHARD, ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Ascension Device",
-					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "10,000 OV-XP",
-					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "1,000 OV-XP",
+					ChatColor.GRAY + "Cost: " + ChatColor.GOLD + "2,500 OV-XP",
+					ChatColor.GRAY + "OV-XP/TP: " + ChatColor.GOLD + "125 OV-XP",
 					"",
 					ChatColor.GRAY + "Teleport to the highest block above you!",
 					"",
@@ -117,7 +117,7 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 		if (clickedItem == null || clickedItem.getType().isAir()) return;
 		
 		if(clickedItem.getType() == Material.BRICK) {
-			if(epp1.getPlayerXP(playerUUIDSection) >= 20000) {
+			if(epp1.getPlayerXP(playerUUIDSection) >= 10000) {
 				if(event.getClick() == ClickType.LEFT) {
 					
 					//create item
@@ -127,7 +127,7 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 							ChatColor.DARK_GRAY + "LEFT CLICK - Go to warp",
 							ChatColor.DARK_GRAY + "RIGHT CLICK - Set warp");
 					
-					onPurchase(p, personalWarpDevice, "Personal Warping Device", "20,000", 20000, playerUUIDSection);
+					onPurchase(p, personalWarpDevice, "Personal Warping Device", "10,000", 10000, playerUUIDSection);
 					
 					if(playerUUIDSection.getInt("warpsAllowed") == 0) {
 						playerUUIDSection.set("warpsAllowed", 1);
@@ -138,10 +138,10 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 					p.sendMessage(ChatColor.GREEN + "Right Click");
 				}
 			} else {
-				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 20,000 OV-XP to purchase this item.");
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 10,000 OV-XP to purchase this item.");
 			}
 		} else if(clickedItem.getType() == Material.FEATHER) {
-			if(epp1.getPlayerXP(playerUUIDSection) >= 20000) {
+			if(epp1.getPlayerXP(playerUUIDSection) >= 10000) {
 				if(event.getClick() == ClickType.LEFT) {	
 					//create item
 					ItemStack playerTeleportationDevice = createGuiItem(Material.FEATHER, ChatColor.DARK_BLUE + "Player Teleportation Device",
@@ -150,38 +150,40 @@ public class ovshop extends InventoryManager implements Listener, CommandExecuto
 							ChatColor.DARK_GRAY + "LEFT CLICK - Teleport to a player",
 							ChatColor.DARK_GRAY + "RIGHT CLICK - Teleport a player to you");
 					
-					onPurchase(p, playerTeleportationDevice, "Player Teleportation Device", "20,000", 20000, playerUUIDSection);
+					onPurchase(p, playerTeleportationDevice, "Player Teleportation Device", "10,000", 10000, playerUUIDSection);
 				} 
 			} else {
-				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 20,000 OV-XP to purchase this item.");
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 10,000 OV-XP to purchase this item.");
 			}
 		} else if(clickedItem.getType() == Material.RABBIT_FOOT) {
-			if(epp1.getPlayerXP(playerUUIDSection) >= 20000) {
+			if(epp1.getPlayerXP(playerUUIDSection) >= 5000) {
 				if(event.getClick() == ClickType.LEFT) {	
 					//create item
 					ItemStack spawnTeleportationDevice = createGuiItem(Material.RABBIT_FOOT, ChatColor.DARK_GREEN + "Spawn Teleportation Device",
 							ChatColor.GRAY + "Owner: " + ChatColor.YELLOW + p.getName(),
 							"",
-							ChatColor.DARK_GRAY + "RIGHT CLICK - Teleport to spawn!");
+							ChatColor.DARK_GRAY + "RIGHT CLICK - Teleport to spawn!",
+							ChatColor.DARK_GRAY + "LEFT CLICK - Cancel");
 					
-					onPurchase(p, spawnTeleportationDevice, "Spawn Teleportation Device", "20,000", 20000, playerUUIDSection);
+					onPurchase(p, spawnTeleportationDevice, "Spawn Teleportation Device", "5,000", 5000, playerUUIDSection);
 				}
 			} else {
-				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 20,000 OV-XP to purchase this item.");
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 5,000 OV-XP to purchase this item.");
 			}
 		} else if(clickedItem.getType() == Material.ECHO_SHARD) {
-			if(epp1.getPlayerXP(playerUUIDSection) >= 10000) {
+			if(epp1.getPlayerXP(playerUUIDSection) >= 2500) {
 				if(event.getClick() == ClickType.LEFT) {	
 					//create item
 					ItemStack ascensionTeleportationDevice = createGuiItem(Material.ECHO_SHARD, ChatColor.DARK_PURPLE + "Ascension Device",
 							ChatColor.GRAY + "Owner: " + ChatColor.YELLOW + p.getName(),
 							"",
-							ChatColor.DARK_GRAY + "RIGHT CLICK - Teleport to the highest block above you!");
+							ChatColor.DARK_GRAY + "RIGHT CLICK - Teleport to the highest block above you!",
+							ChatColor.DARK_GRAY + "LEFT CLICK - Cancel");
 					
-					onPurchase(p, ascensionTeleportationDevice, "Ascension Teleportation Device", "10,000", 10000, playerUUIDSection);
+					onPurchase(p, ascensionTeleportationDevice, "Ascension Teleportation Device", "2,500", 2500, playerUUIDSection);
 				}
 			} else {
-				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 10,000 OV-XP to purchase this item.");
+				p.sendMessage(mainClass.prefix + ChatColor.RED + "You need 2,500 OV-XP to purchase this item.");
 			}
 		}
 	}

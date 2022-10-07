@@ -1,2 +1,9 @@
 Distance by enderpearl
 Highest fall
+
+
+1. click player head
+2. send player request with conversation api
+3. dont do anything until promptaccept
+4. get player answer
+5. teleport or do not teleport ^

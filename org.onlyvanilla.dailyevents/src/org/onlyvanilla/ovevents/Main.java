@@ -13,6 +13,8 @@ import org.onlyvanilla.ovevents.bukkitevents.EditPlayerPoints;
 import org.onlyvanilla.ovevents.bukkitevents.MagicItemsCheck;
 import org.onlyvanilla.ovevents.bukkitevents.PreventItemUsage;
 import org.onlyvanilla.ovevents.bukkitevents.playerEvents;
+import org.onlyvanilla.ovevents.commands.accept;
+import org.onlyvanilla.ovevents.commands.decline;
 import org.onlyvanilla.ovevents.commands.ovehelp;
 import org.onlyvanilla.ovevents.commands.ovevote;
 import org.onlyvanilla.ovevents.commands.ovprofile;
@@ -104,6 +106,8 @@ public class Main extends JavaPlugin implements Listener{
 			this.getCommand("ovevote").setExecutor(new ovevote());
 			this.getCommand("ovehelp").setExecutor(new ovehelp());
 			this.getCommand("ovshop").setExecutor(new ovshop());
+			this.getCommand("accept").setExecutor(new accept());
+			this.getCommand("decline").setExecutor(new decline());
 			
 			//admin commands
 			this.getCommand("configurestats").setExecutor(new configureStats());

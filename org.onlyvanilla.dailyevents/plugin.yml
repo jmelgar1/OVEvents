@@ -58,5 +58,10 @@ commands:
     ovshop:
         description: Open shop
         usage: /ovshop
-        
+    accept:
+        description: Accept a warp request
+        usage: /accept
+    decline:
+        description: Decline a warp request
+        usage: /decline       
         

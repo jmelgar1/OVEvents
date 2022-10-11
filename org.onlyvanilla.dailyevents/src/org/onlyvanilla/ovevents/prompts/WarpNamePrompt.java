@@ -1,4 +1,4 @@
-package org.onlyvanilla.ovevents.managers;
+package org.onlyvanilla.ovevents.prompts;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
